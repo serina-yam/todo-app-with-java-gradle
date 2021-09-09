@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Hello</title>
+<link href="/css/list.css" rel="stylesheet">
+<meta charset="utf-8" />
+</head>
+<body>
+    <h1>やることリスト</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>タイトル</th>
+                <th>済</th>
+                <th>期限</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item : ${itemlist}" th:object="${item}">
+                <td class="center" th:text="*{id}"></td>
+                <td th:text="*{title}"></td>
+                <td class="center" th:text="*{doneFlg}"></td>
+                <td class="center" th:text="${#dates.format(item.timeLimit, 'yyyy/MM/dd')}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
