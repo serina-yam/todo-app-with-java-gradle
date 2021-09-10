@@ -28,7 +28,7 @@ public class ItemController {
   * @param model Model
   * @return ユーザー情報一覧画面のHTML
   */
-  @RequestMapping(value = "/list", method = RequestMethod.GET)
+  @RequestMapping(value = "/", method = RequestMethod.GET)
   public String displayList(Model model) {
     List<Item> itemlist = itemService.searchAll();
     model.addAttribute("itemlist", itemlist);
