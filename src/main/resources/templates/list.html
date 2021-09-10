@@ -1,33 +1,55 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<title>Hello</title>
-<link href="/css/list.css" rel="stylesheet">
-<link th:href="@{webjars/bootstrap/4.4.1-1/css/bootstrap.min.css}" rel="stylesheet"/>
-<script th:href="@{webjars/jquery/3.5.0/js/jquery.min.js}"></script>
-<script th:href="@{webjars/bootstrap/4.4.1-1/js/bootstrap.min.js}"></script>
-<meta charset="utf-8" />
+    <title>Hello</title>
+    <link rel="stylesheet" href="css/list.css">　
+    <link th:href="@{webjars/bootstrap/4.4.1-1/css/bootstrap.min.css}" rel="stylesheet" />
+    <script th:href="@{webjars/jquery/3.5.0/js/jquery.min.js}"></script>
+    <script th:href="@{webjars/bootstrap/4.4.1-1/js/bootstrap.min.js}"></script>
+    <script src="https://kit.fontawesome.com/87d5bdf4e3.js" crossorigin="anonymous"></script>
+    <meta charset="utf-8" />
 </head>
+
 <body>
-    <h1>やることリスト</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>タイトル</th>
-                <th>済</th>
-                <th>期限</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="item : ${itemlist}" th:object="${item}">
-                <td class="center" th:text="*{id}"></td>
-                <td th:text="*{title}"></td>
-                <td class="center" th:text="*{doneFlg}"></td>
-                <td class="center" th:text="${#dates.format(item.timeLimit, 'yyyy/MM/dd')}"></td>
-            </tr>
-        </tbody>
-    </table>
-    <input class="btn btn-primary" type="submit" value="追加">
+    <section class="top">
+        <div class="top__bg"></div>
+        <div class="top__inner">
+            <figure class="top__icon">
+                <i class="fas fa-person-booth"></i>
+                <!-- <img src="../img/check.png" alt="check"> -->
+            </figure>
+            <h1>TODO LIST</h1>
+        </div>
+    </section>
+
+    <section id="main">
+        <div class="inner">
+            <div class="main__buttons">
+                <input class="btn addBtn" type="submit" value="追加">
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>タイトル</th>
+                        <th>済</th>
+                        <th>期限</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${itemlist}" th:object="${item}">
+                        <td class="main__td center" th:text="*{id}"></td>
+                        <td class="main__td center" th:text="*{title}"></td>
+                        <td class="main__td center" th:text="*{doneFlg}"></td>
+                        <td class="main__td center" th:text="${#dates.format(item.timeLimit, 'yyyy/MM/dd')}"></td>
+                        <td class="main__td center"><input class="btn delBtn" type="submit" value="削除"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
 </body>
+
 </html>
