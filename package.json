@@ -1,0 +1,48 @@
+{
+  "name": "todo-app-with-java-gradle",
+  "version": "1.0.0",
+  "description": "TODOアプリ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/serina-yam/todo-app-with-java-gradle.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/serina-yam/todo-app-with-java-gradle/issues"
+  },
+  "homepage": "https://github.com/serina-yam/todo-app-with-java-gradle#readme",
+  "devDependencies": {
+    "css-loader": "^6.2.0",
+    "css-mqpacker": "^7.0.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-notify": "^4.0.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^9.0.1",
+    "gulp-sass": "^5.0.0",
+    "gulp-watch": "^5.0.1",
+    "postcss": "^8.3.6",
+    "postcss-browser-reporter": "^0.6.0",
+    "postcss-cli": "^8.3.1",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-import": "^14.0.2",
+    "postcss-reporter": "^7.0.2",
+    "postcss-url": "^10.1.3",
+    "sass": "^1.39.0",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^3.2.1",
+    "webpack": "^5.52.0",
+    "webpack-cli": "^4.8.0"
+  },
+  "dependencies": {
+    "gulp-rename": "^2.0.0",
+    "gulp-sourcemaps": "^3.0.0"
+  }
+}
