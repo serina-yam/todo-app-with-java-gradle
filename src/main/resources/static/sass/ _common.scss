@@ -1,0 +1,12 @@
+
+
+// カラー
+$mainColor:#80c4d8;
+$subColor:#928178;
+$white: #fff;
+
+
+// フォント
+@mixin noto {
+  font-family: 'Noto Sans JP', sans-serif;
+}

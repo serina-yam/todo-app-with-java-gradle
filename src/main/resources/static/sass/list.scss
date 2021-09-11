@@ -2,16 +2,15 @@
 // list screen
 // --------------------------------
 
-$mainColor:#80c4d8;
-$subColor:#928178;
-$white: #fff;
+@import './common';
+
+
 
 //  インナー
 .inner{
     width: 100%;
     max-width: 1072px;
-    padding-left: 2.4rem;
-    padding-right: 2.4rem;
+    padding: 2.4rem;
     margin: 0 auto;
     overflow: hidden;
 
@@ -32,12 +31,11 @@ $white: #fff;
 
     // 背景画像
     .top__bg {
-        background-image: url(../../img/background2.jpg);
-        background-color: $subColor;
-        // opacity: .8;
+        background-image: url(../../img/background.jpg);
+        background-size: cover;
         background-position: center;
-        width: 100%;
-        height: 40vh;
+        height: 30vh;
+
     }
 
     // インナー
@@ -45,14 +43,16 @@ $white: #fff;
         margin: 0 auto;
         width: 100%;
         max-width: 1072px;
-        margin-top: -4.5rem;
+        margin-top: -2rem;
     }
 
     // icon
     .top__icon {
-        font-size: 6rem;
-        color: $mainColor;
 
+
+        .top__iconImg {
+            width: 70px;
+        }
     }
 }
 
@@ -92,4 +92,70 @@ $white: #fff;
     }
 
 
+}
+
+
+
+
+
+
+// 後で消す
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family:'Avenir','Helvetica, Neue','Helvetica','Arial';
+}
+
+
+/* モーダルCSS */
+.modalArea {
+  display: none;
+  position: fixed;
+  z-index: 10; /*サイトによってここの数値は調整 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.modalBg {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30,30,30,0.9);
+}
+
+.modalWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%,-50%);
+  width: 70%;
+  max-width: 500px;
+  padding: 10px 30px;
+  background-color: #fff;
+}
+
+.closeModal {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+
+/* 以下ボタンスタイル */
+button {
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #282828;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+#openModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%,-50%);
 }
