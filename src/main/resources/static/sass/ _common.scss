@@ -1,12 +1,25 @@
 
 
-// カラー
+// ---------------- カラー ----------------
 $mainColor:#80c4d8;
 $subColor:#928178;
 $white: #fff;
 
 
-// フォント
+// ---------------- フォント ----------------
 @mixin noto {
   font-family: 'Noto Sans JP', sans-serif;
+}
+
+// ---------------- インナー ----------------
+.inner{
+    width: 100%;
+    max-width: 1072px;
+    padding: 2.4rem;
+    margin: 0 auto;
+    overflow: hidden;
+
+    @media screen and (max-width: 480px){
+        padding: 2.4rem;
+    }
 }
