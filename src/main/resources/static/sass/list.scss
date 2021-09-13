@@ -44,6 +44,8 @@
         width: 100%;
         max-width: 1072px;
         margin-top: -2rem;
+
+        padding-left: 2rem;
     }
 
     // icon
@@ -67,17 +69,6 @@
     margin-top: 3.6rem;
     margin-bottom: 4.8rem;
 
-    .main__buttons {
-        display: flex;
-        justify-content: flex-end;
-        padding-bottom: 1.6rem;
-
-        .addBtn {
-            background-color: $mainColor;
-            color: $white;
-            margin-right: 0.8rem;
-        }
-    }
 
     .main__td {
 

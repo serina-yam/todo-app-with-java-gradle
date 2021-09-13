@@ -11,6 +11,22 @@
   }
 }
 
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 1.6rem;
+}
+.buttons .addBtn {
+  background-color: #80c4d8;
+  color: #fff;
+  margin-right: 0.8rem;
+}
+.buttons .backBtn {
+  background-color: #928178;
+  color: #fff;
+  margin-right: 0.8rem;
+}
+
 .inner {
   width: 100%;
   max-width: 1072px;
@@ -38,6 +54,7 @@
   width: 100%;
   max-width: 1072px;
   margin-top: -2rem;
+  padding-left: 2rem;
 }
 .top .top__icon .top__iconImg {
   width: 70px;
@@ -46,16 +63,6 @@
 #main {
   margin-top: 3.6rem;
   margin-bottom: 4.8rem;
-}
-#main .main__buttons {
-  display: flex;
-  justify-content: flex-end;
-  padding-bottom: 1.6rem;
-}
-#main .main__buttons .addBtn {
-  background-color: #80c4d8;
-  color: #fff;
-  margin-right: 0.8rem;
 }
 #main .main__td .btn {
   float: right;
