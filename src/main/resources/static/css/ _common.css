@@ -10,3 +10,19 @@
     padding: 2.4rem;
   }
 }
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 1.6rem;
+}
+.buttons .addBtn {
+  background-color: #80c4d8;
+  color: #fff;
+  margin-right: 0.8rem;
+}
+.buttons .backBtn {
+  background-color: #928178;
+  color: #fff;
+  margin-right: 0.8rem;
+}

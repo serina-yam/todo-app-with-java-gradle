@@ -23,3 +23,24 @@ $white: #fff;
         padding: 2.4rem;
     }
 }
+
+
+// ---------------- ボタン ----------------
+    .buttons {
+        display: flex;
+        justify-content: flex-end;
+        padding-bottom: 1.6rem;
+
+
+        .addBtn {
+            background-color: $mainColor;
+            color: $white;
+            margin-right: 0.8rem;
+        }
+
+        .backBtn {
+            background-color: $subColor;
+            color: $white;
+            margin-right: 0.8rem;
+        }
+    }

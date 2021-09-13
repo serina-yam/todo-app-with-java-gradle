@@ -9,6 +9,6 @@ import com.example.todoappwithjavagradle.entity.Item;
  * アイテム情報 Repository
  */
 @Repository
-public interface ItemRepository extends JpaRepository<Item, Long>  {
+public interface ItemRepository extends JpaRepository<Item, Integer>  {
 
 }

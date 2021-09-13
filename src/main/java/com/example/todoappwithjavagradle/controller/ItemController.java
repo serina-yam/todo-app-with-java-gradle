@@ -9,12 +9,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.validation.annotation.Validated;
 
 import com.example.todoappwithjavagradle.dto.ItemRequest;
 import com.example.todoappwithjavagradle.entity.Item;
+import com.example.todoappwithjavagradle.repository.ItemRepository;
 import com.example.todoappwithjavagradle.service.ItemService;
 
 /**
@@ -34,32 +36,32 @@ public class ItemController {
   * @param model Model
   * @return アイテム情報一覧画面のHTML
   */
-  @RequestMapping(value = "/", method = RequestMethod.GET)
+  @GetMapping(value = "/item/list")
   public String displayList(Model model) {
     List<Item> itemlist = itemService.searchAll();
     model.addAttribute("itemlist", itemlist);
-    return "list";
+    return "/item/list";
   }
 
     /**
-   * アイテム新規登録画面を表示
-   * @param model Model
-   * @return アイテム新規登録画面のHTML
-   */
-  @GetMapping(value = "/list/add")
+    * アイテム新規登録画面を表示
+    * @param model Model
+    * @return アイテム新規登録画面のHTML
+    */
+  @GetMapping(value = "/item/add")
   public String displayAdd(Model model) {
     model.addAttribute("itemRequest", new ItemRequest());
-    return "add";
+    return "/item/add";
   }
 
   /**
    * アイテム新規登録
-   * @param userRequest リクエストデータ
+   * @param itemRequest リクエストデータ
    * @param model Model
    * @return アイテム情報一覧画面
    */
-  @RequestMapping(value = "/list/create", method = RequestMethod.POST)
-  public String create(@Validated ItemRequest itemRequest, BindingResult result, Model model) {
+  @PostMapping(value = "/item/create")
+  public String create(@Validated @ModelAttribute ItemRequest itemRequest, BindingResult result, Model model) {
     if (result.hasErrors()) {
       // 入力チェックエラーの場合
       List<String> errorList = new ArrayList<String>();
@@ -67,10 +69,22 @@ public class ItemController {
         errorList.add(error.getDefaultMessage());
       }
       model.addAttribute("validationError", errorList);
-      return "/list/create";
+      return "/item/add";
     }
     // アイテム情報の登録
     itemService.create(itemRequest);
-    return "redirect:/list";
+    return "redirect:/item/list";
+  }
+
+    /**
+   * アイテム情報 削除
+   * @param itemRequest リクエストデータ
+   * @param model Model
+   * @return アイテム情報一覧画面
+   */
+  @PostMapping(value = "/item/delete")
+  public String delete(@RequestParam Integer id) {
+    itemService.delete(id);
+    return "redirect:/item/list";
   }
 }

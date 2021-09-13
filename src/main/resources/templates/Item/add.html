@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/head :: head_fragment('Item Add',~{::link},~{::script})">
+    <link rel="stylesheet" th:href="@{/css/add.css}" />
+    <script type="text/javascript" th:src="@{/js/add.js}"></script>
+</head>
+
+<body>
+    <section class="add">
+        <div class="add__container">
+            <div class="add__box">
+                <div th:if="${validationError}" th:each="error : ${validationError}">
+                    <label class="text-danger" th:text="${error}"></label>
+                </div>
+                <h1 class="add__title">新規追加</h1>
+                <form th:action="@{/item/create}" th:object="${itemRequest}" th:method="post">
+                    <dl class="add__dl">
+                        <div class="add__flexBox form-group">
+                            <dt class="add__dt">タイトル</dt>
+                            <dd class="add__dd">
+                                <input type="text" th:field="*{title}" class="form-control">
+                            </dd>
+                        </div>
+                        <div class="add__flexBox form-group">
+                            <dt class="add__dt">期限</dt>
+
+                            <dd class="add__dd">
+                                <label class="date-edit"><input name="date" type="date" th:field="*{timeLimit}" class="form-control"></label>
+                            </dd>
+                        </div>
+                    </dl>
+                    <div class="buttons">
+                        <a th:href="@{/item/list}" class="btn backBtn">戻る</a>
+                        <input type="submit" class="btn addBtn" value="追加">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
