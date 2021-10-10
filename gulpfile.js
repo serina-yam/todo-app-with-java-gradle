@@ -1,10 +1,10 @@
 /*
 src 参照元を指定
-dest 出力さきを指定
+dest 出力先を指定
 watch ファイル監視
-series(直列処理)とparallel(並列処理)
+series(直列処理)と(並列処理)
 */
-const { gulp, src, dest, watch, series, parallel } = require('gulp');
+const { gulp, src, dest, watch, series} = require('gulp');
 
 // プラグインを呼び出し
 var sass = require('gulp-sass')(require('sass'));
