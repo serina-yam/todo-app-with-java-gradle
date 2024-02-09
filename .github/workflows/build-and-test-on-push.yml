@@ -24,6 +24,4 @@ jobs:
           cache: gradle
       # Test実行
       - name: Run tests
-        uses: eskatos/gradle-command-action@v1
-        with:
-          arguments: test
+        run: ./gradlew test
