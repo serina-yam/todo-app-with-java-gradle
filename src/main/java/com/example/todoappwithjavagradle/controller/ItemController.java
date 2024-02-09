@@ -35,11 +35,11 @@ public class ItemController {
   * @param model Model
   * @return アイテム情報一覧画面のHTML
   */
-  @GetMapping(value = "/item/list")
+  @GetMapping(value = "/")
   public String displayList(Model model) {
     List<Item> itemlist = itemService.searchAll();
     model.addAttribute("itemlist", itemlist);
-    return "/item/list";
+    return "index";
   }
 
     /**
@@ -72,7 +72,7 @@ public class ItemController {
     }
     // アイテム情報の登録
     itemService.create(itemRequest);
-    return "redirect:/item/list";
+    return "redirect:index";
   }
 
     /**
@@ -84,6 +84,6 @@ public class ItemController {
   @PostMapping(value = "/item/delete")
   public String delete(@RequestParam Integer id) {
     itemService.delete(id);
-    return "redirect:/item/list";
+    return "redirect:/index";
   }
 }
