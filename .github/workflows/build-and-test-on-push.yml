@@ -1,0 +1,32 @@
+# Workflowの名前
+name: java test
+
+# Workflowを動かすトリガー（=Event）を指定。
+# 今回はpushをEventに設定
+on:
+  - push
+
+jobs:
+  # build job
+  build:
+    # Runnerを指定
+    runs-on: ubuntu-latest
+    # Step
+    steps:
+      # RunnnerにGitリポジトリのコピーをダウンロード
+      - uses: actions/checkout@v3
+      # Java 17をセットアップ
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      # maven build
+      - name: Build with Maven
+        run: mvn --batch-mode --update-snapshots package
+        working-directory: ./java_test3
+      # Test実行
+      - name: Test with Maven
+        run: mvn --batch-mode test
+        working-directory: ./java_test3
