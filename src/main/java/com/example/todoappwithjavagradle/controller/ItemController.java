@@ -16,7 +16,6 @@ import org.springframework.validation.annotation.Validated;
 
 import com.example.todoappwithjavagradle.dto.ItemRequest;
 import com.example.todoappwithjavagradle.entity.Item;
-import com.example.todoappwithjavagradle.repository.ItemRepository;
 import com.example.todoappwithjavagradle.service.ItemService;
 
 /**
