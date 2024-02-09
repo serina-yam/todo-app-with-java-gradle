@@ -25,6 +25,12 @@ jobs:
       # gradle build
       - name: Build with Gradle
         run: ./gradlew build
+        env:
+          # Gradleのバージョンを指定
+          GRADLE_OPTS: '-Dorg.gradle.java.home=/usr/lib/jvm/adoptopenjdk-17-hotspot'
       # Test実行
       - name: Run tests
         run: ./gradlew test
+        env:
+          # Gradleのバージョンを指定
+          GRADLE_OPTS: '-Dorg.gradle.java.home=/usr/lib/jvm/adoptopenjdk-17-hotspot'
