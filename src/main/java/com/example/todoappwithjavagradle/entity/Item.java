@@ -17,7 +17,7 @@ import lombok.Data;
  */
 @Entity
 @Data
-@Table(name = "todo_items")
+@Table(name = "item")
 public class Item {
 
     /**
