@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+  
+    <!-- ログインフォーム -->
+    <h2>ログイン</h2>
+    <form action="/login" method="post">
+        <input type="text" name="username" class="login-input" placeholder="Username">
+        <input type="password" name="password" class="login-input" placeholder="Password">
+        <button type="submit" class="login-btn">Login</button>
+        <a href="/register">新規登録</a>
+    </form>
+
+    <!-- GitHubアカウントによるログイン -->
+    <a th:href="@{/oauth2/authorization/github}" class="btn btn-github">GitHubでログイン</a>
+
+    <!-- Googleアカウントによるログイン -->
+    <a th:href="@{/oauth2/authorization/google}" class="btn btn-google">Googleでログイン</a>
+</body>
+</html>
