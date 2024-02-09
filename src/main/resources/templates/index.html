@@ -3,7 +3,7 @@
 
 <head th:replace="common/head :: head_fragment('Item List',~{::link},~{::script})">
     <link rel="stylesheet" th:href="@{/css/list.css}" />
-    <script type="text/javascript" th:src="@{/js/list.js}"></script>
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
 </head>
 
 <body>
@@ -21,6 +21,13 @@
         <div class="inner">
             <div class="buttons">
                 <a th:href="@{/item/add}" class="btn addBtn">追加</a>
+                <form action="#" th:action="@{/logout}" method="post">
+                    <input type="submit" value="ログアウト"/> <!-- ログアウトボタン -->
+                </form>
+                <div sec:authorize="isAuthenticated()">
+                    <p>ログイン中です。</p>
+                    <!-- この要素はログイン中のユーザーにのみ表示されます -->
+                </div>
             </div>
 
 
