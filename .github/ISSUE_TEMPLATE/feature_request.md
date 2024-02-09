@@ -11,8 +11,6 @@ assignees: serina-yam
 
 ## Todo
 
-- [ ]
-- [ ]
-- [ ]
+- [ ] タスク
 
 ## 参考
