@@ -1,5 +1,5 @@
 # Workflowの名前
-name: java test
+name: Build and Test on Push
 
 # Workflowを動かすトリガー（=Event）を指定。
 # 今回はpushをEventに設定
@@ -22,11 +22,13 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-      # maven build
-      - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots package
-        working-directory: ./java_test3
+      # gradle build
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: 7.4
       # Test実行
-      - name: Test with Maven
-        run: mvn --batch-mode test
-        working-directory: ./java_test3
+      - name: Run test
+        uses: eskatos/gradle-command-action@v1
+        with:
+          arguments: test
