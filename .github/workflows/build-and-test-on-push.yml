@@ -29,6 +29,14 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       
+    # dockerizeをインストール
+    - name: Install dockerize
+      run: |
+        wget https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz
+        tar -xzvf dockerize-linux-amd64-v0.6.1.tar.gz
+        sudo mv dockerize /usr/local/bin/dockerize
+        rm dockerize-linux-amd64-v0.6.1.tar.gz
+      
     # Java 17をセットアップ
     - name: Set up JDK 17
       uses: actions/setup-java@v3
