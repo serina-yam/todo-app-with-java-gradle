@@ -72,7 +72,7 @@ public class ItemController {
     }
     // アイテム情報の登録
     itemService.create(itemRequest);
-    return "redirect:index";
+    return "redirect:/";
   }
 
     /**
@@ -84,6 +84,6 @@ public class ItemController {
   @PostMapping(value = "/item/delete")
   public String delete(@RequestParam Integer id) {
     itemService.delete(id);
-    return "redirect:/index";
+    return "redirect:/";
   }
 }

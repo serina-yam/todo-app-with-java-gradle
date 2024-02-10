@@ -1,5 +1,6 @@
 package com.example.todoappwithjavagradle.entity;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -7,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -39,4 +42,15 @@ public class Item {
     @Column(name = "updated_at")
     private java.sql.Timestamp updatedAt;
 
+    @PrePersist
+    protected void onCreate() {
+        Timestamp ts = new Timestamp(System.currentTimeMillis());
+        this.createdAt = ts;
+        this.updatedAt = ts;
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = new Timestamp(System.currentTimeMillis());
+    }
 }
