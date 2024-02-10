@@ -1,27 +1,42 @@
-# Workflowの名前
 name: Build and Test on Push
 
-# Workflowを動かすトリガー（=Event）を指定
 # pushをEventに設定
 on:
   - push
 
 jobs:
-  # build job
   build:
     # Runnerを指定
     runs-on: ubuntu-latest
-    # Step
+    
+    env:
+      POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+      POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+      POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      DATABASE_URL: jdbc:postgresql://localhost:5432/${{ secrets.POSTGRES_DB }}
+
     steps:
-      # RunnnerにGitリポジトリのコピーをダウンロード
-      - uses: actions/checkout@v3
-      # Java 17をセットアップ
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-          cache: gradle
-      # Test実行
-      - name: Run tests
-        run: ./gradlew test
+    # RunnnerにGitリポジトリのコピーをダウンロード
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    # Java 17をセットアップ
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'adopt'
+        java-version: '17'
+    # PostgreSQLをセットアップ
+    - name: Set up PostgreSQL
+      uses: docker-compose-action@v3
+      with:
+        compose-file: docker-compose.yml
+        run: |
+          sleep 10 # waiting for PostgreSQL to start
+          docker exec -i postgres psql -U ${{ secrets.POSTGRES_USER }} -d ${{ secrets.POSTGRES_DB }} -c "CREATE EXTENSION IF NOT EXISTS pgcrypto;"
+
+    # Build
+    - name: Build with Gradle
+      run: ./gradlew build
+    # Test実行
+    - name: Run tests
+      run: ./gradlew test
