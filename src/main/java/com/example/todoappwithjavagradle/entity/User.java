@@ -1,10 +1,14 @@
 package com.example.todoappwithjavagradle.entity;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -39,5 +43,18 @@ public class User {
     public User(String username, String passwordHash) {
         this.username = username;
         this.passwordHash = passwordHash;
+    }
+
+
+    @PrePersist
+    protected void onCreate() {
+        Timestamp ts = new Timestamp(System.currentTimeMillis());
+        this.createdAt = ts;
+        this.updatedAt = ts;
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = new Timestamp(System.currentTimeMillis());
     }
 }
