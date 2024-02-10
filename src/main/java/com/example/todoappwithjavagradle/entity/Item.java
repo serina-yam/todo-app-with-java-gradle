@@ -20,32 +20,23 @@ import lombok.Data;
 @Table(name = "item")
 public class Item {
 
-    /**
-     * ID
-     */
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    /**
-     * title
-     */
     @Column(name = "title")
     private String title;
 
-
-    /**
-     * done_flg
-     */
     @Column(name = "done_flg")
     private Integer doneFlg;
 
-
-    /**
-     * time_limit
-     */
     @Column(name = "time_limit")
     private  Date timeLimit;
+
+    @Column(name = "created_at")
+    private java.sql.Timestamp createdAt;
+
+    @Column(name = "updated_at")
+    private java.sql.Timestamp updatedAt;
 
 }
