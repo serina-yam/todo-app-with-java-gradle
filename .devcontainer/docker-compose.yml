@@ -1,0 +1,48 @@
+version: '3.9'
+
+services:
+  todo-app-with-java-gradle:
+    container_name: todo-app-with-java-gradle
+    build:
+      context: ./docker
+    tty: true
+    volumes:
+      - ../:/home/vscode/workspace:cache
+    ports:
+      - 8080:8080
+    depends_on:
+        - db
+
+  # postgresの設定情報
+  db:
+    image: postgres:latest
+    container_name: db
+    restart: always
+    ports:
+        - 5432:5432
+    environment:
+        POSTGRES_USER: 'dev' # DBのユーザー名（＝DB名）
+        POSTGRES_PASSWORD: 'pass' # DBのパスワード
+    volumes:
+        - ./init_db:/docker-entrypoint-initdb.d
+
+  test_db:
+    image: postgres:latest
+    container_name: test_db
+    restart: always
+    ports:
+        - 5433:5432
+    environment:
+        POSTGRES_USER: 'test' # DBのユーザー名（＝DB名）
+        POSTGRES_PASSWORD: 'pass' # DBのパスワード
+    volumes:
+        - ./init_db_test:/docker-entrypoint-initdb.d
+
+  adminer:
+    image: adminer:4.8.1
+    container_name: adminer
+    ports:
+      - "9000:8080"
+    depends_on:
+      - db
+      - test_db
