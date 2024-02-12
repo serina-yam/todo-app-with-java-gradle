@@ -82,7 +82,7 @@ public class ItemController {
    * @return アイテム情報一覧画面
    */
   @PostMapping(value = "/item/delete")
-  public String delete(@RequestParam Integer id) {
+  public String delete(@RequestParam("id") Integer id) {
     itemService.delete(id);
     return "redirect:/";
   }
