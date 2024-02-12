@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="common/head :: head_fragment('Item List',~{::link},~{::script})">
+    <link rel="stylesheet" th:href="@{/css/list.css}" />
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
+</head>
+
+<body>
+    <section class="top">
+        <div class="top__bg"></div>
+        <div class="top__inner">
+            <figure class="top__icon">
+                <img class="top__iconImg" src="/img/check.png" alt="check">
+            </figure>
+            <h1>TODO LIST</h1>
+        </div>
+    </section>
+
+    <section id="main">
+        <div class="inner">
+            <div class="buttons">
+                <a th:href="@{/item/add}" class="btn addBtn">追加</a>
+                <form action="#" th:action="@{/logout}" method="post">
+                    <input type="submit" value="ログアウト"/> <!-- ログアウトボタン -->
+                </form>
+                <div sec:authorize="isAuthenticated()">
+                    <p>ログイン中です。</p>
+                    <!-- この要素はログイン中のユーザーにのみ表示されます -->
+                </div>
+            </div>
+
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>タイトル</th>
+                        <th>済</th>
+                        <th>期限</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${itemlist}" th:object="${item}">
+                        <td class="main__td center" th:text="*{id}"></td>
+                        <td class="main__td center" th:text="*{title}"></td>
+                        <td class="main__td center" th:text="*{state} == 0 ? '' : ${state}"></td>
+                        <td class="main__td center" th:text="${#dates.format(item.timeLimit, 'yyyy/MM/dd')}"></td>
+                        <form th:action="@{/item/delete}" method="post">
+                            <td class="main__td center">
+                                <input type="hidden" name="id" th:value="*{id}" />
+                                <input class="btn delBtn" type="submit" value="削除">
+                            </td>
+                        </form>                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+
+</html>
