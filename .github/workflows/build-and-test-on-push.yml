@@ -64,8 +64,8 @@ jobs:
 
     # Build
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./app/gradlew build
       
     # Test実行
     - name: Run tests
-      run: ./gradlew test
+      run: ./app/gradlew test
