@@ -1,16 +1,12 @@
 package com.example.todoappwithjavagradle.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
 
 @Configuration
 @EnableWebSecurity
@@ -31,10 +27,11 @@ public class SecurityConfig {
                 .cors(customizer -> customizer.configurationSource(corsConfigurationSource()))
                 // CSRFの保護を無効にする
                 .csrf(csrf -> csrf.disable())
+                // アクセス制御の設定
                 .authorizeRequests(authorizeRequests ->
-                        authorizeRequests
-                                .antMatchers("/login", "/register").permitAll() // ログインページ、新規登録ページ、OAuth2エンドポイントは認証なしでアクセス可能
-                                .anyRequest().authenticated()
+                authorizeRequests
+                        .requestMatchers("/login", "/register").permitAll() // ログインページ、新規登録ページ、OAuth2エンドポイントは認証なしでアクセス可能
+                        .anyRequest().authenticated()
                 )
                 .formLogin(formLogin ->
                         formLogin
