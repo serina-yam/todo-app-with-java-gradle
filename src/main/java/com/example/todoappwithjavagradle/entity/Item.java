@@ -30,8 +30,8 @@ public class Item {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "done_flg")
-    private Integer doneFlg;
+    @Column(name = "state")
+    private Integer state;
 
     @Column(name = "time_limit")
     private  Date timeLimit;
