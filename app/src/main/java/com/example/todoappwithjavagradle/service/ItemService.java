@@ -35,9 +35,8 @@ public class ItemService {
    * @param item アイテム情報
    */
   public void create(ItemRequest ItemRequest) {
-    // Date now = new Date();
+
     Item item = new Item();
-    // idは自動付与
 
     // 日付変換
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -45,16 +44,17 @@ public class ItemService {
     java.sql.Date date = java.sql.Date.valueOf(formattedDate);
 
     item.setTitle(ItemRequest.getTitle());
-    item.setDoneFlg(0); //済フラグは最初は0
+    item.setState(0);
     item.setTimeLimit(date);
 
-    // item.setCreateDate(now);
-    // item.setUpdateDate(now);
     itemRepository.save(item);
   }
 
 
-  // 削除
+  /**
+   * 削除.
+   * @param id
+   */
   public void delete(Integer id) {
     itemRepository.deleteById(id);
   }

@@ -45,7 +45,7 @@
                     <tr th:each="item : ${itemlist}" th:object="${item}">
                         <td class="main__td center" th:text="*{id}"></td>
                         <td class="main__td center" th:text="*{title}"></td>
-                        <td class="main__td center" th:text="*{doneFlg} == 0 ? '' : ${doneFlg}"></td>
+                        <td class="main__td center" th:text="*{state} == 0 ? '' : ${state}"></td>
                         <td class="main__td center" th:text="${#dates.format(item.timeLimit, 'yyyy/MM/dd')}"></td>
                         <form th:action="@{/item/delete}" method="post">
                             <td class="main__td center">
