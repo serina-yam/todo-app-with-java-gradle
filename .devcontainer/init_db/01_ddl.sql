@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS users (
 -- Create item table
 CREATE TABLE IF NOT EXISTS item (
     id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id),
     title VARCHAR(200) NOT NULL,
     state INTEGER NOT NULL DEFAULT 0,
     time_limit DATE,
