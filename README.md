@@ -70,4 +70,5 @@ http://localhost:8080
 
 #### 7.テスト実行
 
-左メニュー：テストから実行したい箇所で起動ボタンをクリックして起動する。
+左メニュー：テストから実行したい箇所で起動ボタンをクリックして起動する
+![test実行](https://github.com/serina-yam/todo-app-with-java-gradle/assets/64587946/4104b948-d54d-49c1-a4d8-91998fa7960d)
