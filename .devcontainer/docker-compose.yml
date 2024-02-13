@@ -13,7 +13,7 @@ services:
     depends_on:
         - db
 
-  # postgresの設定情報
+  # dev用データベース
   db:
     image: postgres:latest
     container_name: db
@@ -21,11 +21,12 @@ services:
     ports:
         - 5432:5432
     environment:
-        POSTGRES_USER: 'dev' # DBのユーザー名（＝DB名）
-        POSTGRES_PASSWORD: 'pass' # DBのパスワード
+        POSTGRES_USER: 'dev' # = DB名
+        POSTGRES_PASSWORD: 'pass'
     volumes:
         - ./init_db:/docker-entrypoint-initdb.d
 
+  # test用データベース
   test_db:
     image: postgres:latest
     container_name: test_db
@@ -33,11 +34,12 @@ services:
     ports:
         - 5433:5432
     environment:
-        POSTGRES_USER: 'test' # DBのユーザー名（＝DB名）
-        POSTGRES_PASSWORD: 'pass' # DBのパスワード
+        POSTGRES_USER: 'test' # = DB名
+        POSTGRES_PASSWORD: 'pass'
     volumes:
         - ./init_db_test:/docker-entrypoint-initdb.d
 
+  # Webベースのデータベース管理ツール
   adminer:
     image: adminer:4.8.1
     container_name: adminer
