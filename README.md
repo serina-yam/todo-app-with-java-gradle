@@ -54,9 +54,8 @@ git clone https://github.com/serina-yam/todo-app-with-java-gradle.git
 
 #### 2. インストールした「todo-app-with-java-gradle」ディレクトリをVSCodeで開く
 
-#### 3. プラグイン「Dev Containers」をインストールする
+#### 3. プラグイン「[Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)」をインストールする
 
-https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
 ![Dev Containers](https://github.com/serina-yam/todo-app-with-java-gradle/assets/64587946/daeb67a3-aa20-4ddd-ae93-452ef9217e93)
 
 #### 4. コマンドパレットで「開発コンテナ: コンテナでリビルドして再度開く」を選択
