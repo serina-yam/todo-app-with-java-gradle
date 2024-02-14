@@ -56,6 +56,9 @@ public class ItemService {
    * @param id
    */
   public void delete(Integer id) {
+    if (id == null) {
+      return;
+    }
     itemRepository.deleteById(id);
   }
 
