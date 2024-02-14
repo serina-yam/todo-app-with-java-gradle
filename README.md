@@ -29,7 +29,13 @@ make run
 
 http://localhost:8080
 
-#### 6. テスト実行
+#### 6.ビルド時に作成されたテスト結果を見る
+
+```zsh
+make open-test-result
+```
+
+#### 7. テスト実行
 
 ```zsh
 make test
