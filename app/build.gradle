@@ -2,6 +2,7 @@ plugins {
 	id 'java'
     id 'org.springframework.boot' version '3.2.2'
     id 'io.spring.dependency-management' version '1.1.4'
+	id 'jacoco'
 }
 
 group = 'com.example'
@@ -45,4 +46,34 @@ tasks.named('test') {
 
 tasks.withType(JavaCompile) {
     options.compilerArgs << "-parameters"
+}
+
+// testの設定
+jacoco {
+    toolVersion = "0.8.7"
+}
+
+test {
+    jacoco {
+        enabled = true
+        destinationFile = file("$buildDir/jacoco/test.exec")
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination file("$buildDir/reports/jacoco/html")
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.8 // テストカバレッジの最低目標
+            }
+        }
+    }
 }
