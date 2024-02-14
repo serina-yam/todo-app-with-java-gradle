@@ -29,17 +29,18 @@ make run
 
 http://localhost:8080
 
-#### 6.ビルド時に作成されたテスト結果を見る
+#### 6. テスト実行
+
+```zsh
+make test
+```
+
+#### 7.ビルド時に作成されたテスト結果を見る
 
 ```zsh
 make open-test-result
 ```
 
-#### 7. テスト実行
-
-```zsh
-make test
-```
 
 ### 手順2: VSCodeを使用する場合
 
@@ -77,7 +78,18 @@ http://localhost:8080
 #### 7.テスト実行
 
 左メニュー：テストから実行したい箇所で起動ボタンをクリックして起動する
+
 ![test実行](https://github.com/serina-yam/todo-app-with-java-gradle/assets/64587946/4104b948-d54d-49c1-a4d8-91998fa7960d)
+
+#### 8.ビルド時に作成されたテスト結果を見る
+
+リモート接続を解除した状態でターミナルを開き、ルートディレクトで以下のコマンドを実行する。
+
+```zsh
+make open-test-result
+```
+
+
 
 ## ER図
 ![er](https://github.com/serina-yam/todo-app-with-java-gradle/assets/64587946/a4ea2a78-8288-4c96-a9ac-0bc87c8ea47b)
