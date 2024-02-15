@@ -84,7 +84,6 @@ public class ItemServiceTests {
     
 
     @Test
-    @CsvFileSource(resources = "/item_test_data.csv", numLinesToSkip = 1)
     public void testDelete() {
         // テスト
         itemService.delete(1);
