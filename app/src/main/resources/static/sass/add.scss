@@ -42,13 +42,12 @@
   // 横並び要素
   .add__flexBox {
   display: flex;
-  align-items: center;
   margin-bottom: 2.4rem;
 
 
   .add__dt {
     width: 30%;
-
+    padding-top: 0.4rem;
   }
 
   // 入力エリア
@@ -58,8 +57,17 @@
     width: 50%;
 
     input {
+      position: relative;
       width: 100%;
       line-height: 2rem;
+
+      &[type="date"] {
+        width: 60%;
+      }
+    }
+
+    .text-danger {
+      margin-top: 0.4rem;
     }
   }
 }

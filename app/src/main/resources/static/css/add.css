@@ -55,11 +55,11 @@
 
 .add__flexBox {
   display: flex;
-  align-items: center;
   margin-bottom: 2.4rem;
 }
 .add__flexBox .add__dt {
   width: 30%;
+  padding-top: 0.4rem;
 }
 .add__flexBox .add__dd {
   margin-left: 3.6rem;
@@ -67,6 +67,13 @@
   width: 50%;
 }
 .add__flexBox .add__dd input {
+  position: relative;
   width: 100%;
   line-height: 2rem;
+}
+.add__flexBox .add__dd input[type=date] {
+  width: 60%;
+}
+.add__flexBox .add__dd .text-danger {
+  margin-top: 0.4rem;
 }

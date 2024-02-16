@@ -13,7 +13,11 @@
             <figure class="top__icon">
                 <img class="top__iconImg" src="/img/check.png" alt="check">
             </figure>
-            <h1>TODO LIST</h1>
+            <div class="top__box">
+                <h1>TODO LIST</h1>
+                <a th:href="@{/logout}" class="btn logoutBtn">ログアウト</a>
+            </div>
+        </div>
         </div>
     </section>
 
@@ -21,15 +25,7 @@
         <div class="inner">
             <div class="buttons">
                 <a th:href="@{/item/add}" class="btn addBtn">追加</a>
-                <form action="#" th:action="@{/logout}" method="post">
-                    <input type="submit" value="ログアウト"/> <!-- ログアウトボタン -->
-                </form>
-                <div sec:authorize="isAuthenticated()">
-                    <p>ログイン中です。</p>
-                    <!-- この要素はログイン中のユーザーにのみ表示されます -->
-                </div>
             </div>
-
 
             <table class="table table-hover">
                 <thead>
@@ -43,12 +39,12 @@
                 </thead>
                 <tbody>
                     <tr th:each="item : ${itemlist}" th:object="${item}">
-                        <td class="main__td center" th:text="*{id}"></td>
-                        <td class="main__td center" th:text="*{title}"></td>
-                        <td class="main__td center" th:text="*{state} == 0 ? '' : ${state}"></td>
-                        <td class="main__td center" th:text="${#dates.format(item.timeLimit, 'yyyy/MM/dd')}"></td>
+                        <td class="main__td" th:text="*{id}"></td>
+                        <td class="main__td" th:text="*{title}"></td>
+                        <td class="main__td" th:text="*{state} == 0 ? '' : ${state}"></td>
+                        <td class="main__td" th:text="${#dates.format(item.timeLimit, 'yyyy/MM/dd')}"></td>
                         <form th:action="@{/item/delete}" method="post">
-                            <td class="main__td center">
+                            <td class="main__td">
                                 <input type="hidden" name="id" th:value="*{id}" />
                                 <input class="btn delBtn" type="submit" value="削除">
                             </td>

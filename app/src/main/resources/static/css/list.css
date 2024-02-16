@@ -54,7 +54,18 @@
   width: 100%;
   max-width: 1072px;
   margin-top: -2rem;
-  padding-left: 2rem;
+  padding-left: 2.4rem;
+  padding-right: 2.4rem;
+}
+.top .top__inner .top__box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.top .top__inner .top__box .logoutBtn {
+  background-color: #b3b3b3;
+  color: #fff;
+  margin-right: 0.8rem;
 }
 .top .top__icon .top__iconImg {
   width: 70px;
@@ -63,6 +74,9 @@
 #main {
   margin-top: 3.6rem;
   margin-bottom: 4.8rem;
+}
+#main .main__td {
+  vertical-align: middle;
 }
 #main .main__td .btn {
   float: right;

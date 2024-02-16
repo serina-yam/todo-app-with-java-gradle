@@ -3,6 +3,7 @@
 // ---------------- カラー ----------------
 $mainColor:#80c4d8;
 $subColor:#928178;
+$grayColor:#b3b3b3;
 $white: #fff;
 
 
@@ -26,21 +27,20 @@ $white: #fff;
 
 
 // ---------------- ボタン ----------------
-    .buttons {
-        display: flex;
-        justify-content: flex-end;
-        padding-bottom: 1.6rem;
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 1.6rem;
 
-
-        .addBtn {
-            background-color: $mainColor;
-            color: $white;
-            margin-right: 0.8rem;
-        }
-
-        .backBtn {
-            background-color: $subColor;
-            color: $white;
-            margin-right: 0.8rem;
-        }
+    .addBtn {
+        background-color: $mainColor;
+        color: $white;
+        margin-right: 0.8rem;
     }
+
+    .backBtn {
+        background-color: $subColor;
+        color: $white;
+        margin-right: 0.8rem;
+    }
+}
