@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <head th:replace="common/head :: head_fragment('Item List',~{::link},~{::script})">
+    <head th:replace="~{common/head :: head_fragment('Item List',~{::link},~{::script})}">
         <link rel="stylesheet" th:href="@{/css/login.css}" />
     </head>
     <body>
@@ -31,6 +31,6 @@
             </div>
         </section>
 
-        <th:block th:include="common/scripts"></th:block>
+        <th:block th:insert="~{common/scripts}"></th:block>
     </body>
 </html>

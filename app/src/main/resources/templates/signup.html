@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="common/head :: head_fragment('Signup',~{::link},~{::script})">
+    <head th:replace="~{common/head :: head_fragment('Signup',~{::link},~{::script})}">
         <link rel="stylesheet" th:href="@{/css/signup.css}" />
     </head>
 
@@ -25,6 +25,6 @@
             </div>
         </section>
 
-        <th:block th:include="common/scripts"></th:block>
+        <th:block th:insert="~{common/scripts}"></th:block>
     </body>
 </html>

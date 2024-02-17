@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="common/head :: head_fragment('Error',~{::link},~{::script})">
+    <head th:replace="~{common/head :: head_fragment('Error',~{::link},~{::script})}">
         <link rel="stylesheet" th:href="@{/css/error.css}" />
     </head>
 
@@ -15,6 +15,6 @@
             </div>
         </section>
 
-        <th:block th:include="common/scripts"></th:block>
+        <th:block th:insert="~{common/scripts}"></th:block>
     </body>
 </html>

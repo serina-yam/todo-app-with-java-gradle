@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="common/head :: head_fragment('Item List',~{::link},~{::script})">
+    <head th:replace="~{common/head :: head_fragment('Item List',~{::link},~{::script})}">
         <link rel="stylesheet" th:href="@{/css/style.css}" />
         <script type="text/javascript" th:src="@{/js/main.js}"></script>
     </head>
@@ -52,6 +52,6 @@
             </div>
         </section>
 
-        <th:block th:include="common/scripts"></th:block>
+        <th:block th:insert="~{common/scripts}"></th:block>
     </body>
 </html>
