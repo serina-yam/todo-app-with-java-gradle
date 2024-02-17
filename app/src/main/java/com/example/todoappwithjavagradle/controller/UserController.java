@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.todoappwithjavagradle.service.UserService;
 
 @Controller
-@RequestMapping("/register")
+@RequestMapping("/signup")
 public class UserController {
 
     @Autowired
@@ -18,7 +18,7 @@ public class UserController {
 
     @GetMapping
     public String showRegistrationForm() {
-        return "registration"; // registration.htmlを返す
+        return "signup"; // signup.htmlを返す
     }
 
     @PostMapping

@@ -1,0 +1,38 @@
+// --------------------------------
+// ログイン画面
+// --------------------------------
+
+@import "./ _common.scss";
+
+.error {
+    background-color: $lightBrown;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+
+    // コンテナ
+    .error__container {
+        max-width: 1072px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        height: 100%;
+
+        // ボックス
+        .error__box {
+            background-color: $white;
+            border-radius: 10px;
+            box-shadow: 2px 2px 2px $subColor;
+            padding: 2.4rem;
+
+            .error__title {
+                margin-bottom: 2.4rem;
+            }
+
+            .error__text {
+            }
+        }
+    }
+}

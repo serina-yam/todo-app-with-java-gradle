@@ -1,24 +1,36 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
-  
-    <!-- ログインフォーム -->
-    <h2>ログイン</h2>
-    <form action="/login" method="post">
-        <input type="text" name="username" class="login-input" placeholder="Username">
-        <input type="password" name="password" class="login-input" placeholder="Password">
-        <button type="submit" class="login-btn">Login</button>
-        <a href="/register">新規登録</a>
-    </form>
+    <head th:replace="common/head :: head_fragment('Item List',~{::link},~{::script})">
+        <link rel="stylesheet" th:href="@{/css/login.css}" />
+    </head>
+    <body>
+        <section class="login">
+            <div class="login__container">
+                <div class="login__box">
+                    <form th:action="@{/login}" method="post">
+                        <div class="login__inner">
+                            <h2 class="login__title">ログイン</h2>
+                            <div>
+                                <input type="text" name="username" placeholder="Username" />
+                                <label class="text-danger" th:text="${usernameError}" th:if="${not #strings.isEmpty(usernameError)}"></label>
+                                <input type="password" name="password" placeholder="Password" />
+                                <label class="text-danger" th:text="${passwordError}" th:if="${not #strings.isEmpty(passwordError)}"></label>
+                                <button type="submit" class="btn btn-login">ログイン</button>
+                                <a class="link-signup" th:href="@{/signup}">新規登録はこちら</a>
+                            </div>
+                            <div class="separator">
+                                <span class="or">または</span>
+                            </div>
+                            <div>
+                                <a th:href="@{/oauth2/authorization/github}" class="btn btn-github">GitHubでログイン</a>
+                                <a th:href="@{/oauth2/authorization/google}" class="btn btn-google">Googleでログイン</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
 
-    <!-- GitHubアカウントによるログイン -->
-    <a th:href="@{/oauth2/authorization/github}" class="btn btn-github">GitHubでログイン</a>
-
-    <!-- Googleアカウントによるログイン -->
-    <a th:href="@{/oauth2/authorization/google}" class="btn btn-google">Googleでログイン</a>
-</body>
+        <th:block th:include="common/scripts"></th:block>
+    </body>
 </html>

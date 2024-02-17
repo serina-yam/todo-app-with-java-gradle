@@ -27,13 +27,17 @@
   margin-right: 0.8rem;
 }
 
-.add {
-  background-image: url(../../images/background.jpg);
+.text-danger {
+  color: #db4455;
+}
+
+.signup {
+  background-color: #b7aea4;
   background-size: cover;
   background-position: center;
   height: 100vh;
 }
-.add .add__container {
+.signup .signup__container {
   max-width: 1072px;
   box-sizing: border-box;
   display: flex;
@@ -42,38 +46,37 @@
   margin: 0 auto;
   height: 100%;
 }
-.add .add__container .add__box {
+.signup .signup__container .signup__box {
   background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 2px 2px 2px #928178;
   padding: 2.4rem;
-  width: 70%;
 }
-.add .add__container .add__box .add__title {
+.signup .signup__container .signup__box .signup__inner {
+  width: 80%;
+  margin: 0 auto;
+}
+.signup .signup__container .signup__box .signup__inner .signup__title {
   margin-bottom: 2.4rem;
 }
-
-.add__flexBox {
-  display: flex;
-  margin-bottom: 2.4rem;
-}
-.add__flexBox .add__dt {
-  width: 30%;
-  padding-top: 0.4rem;
-}
-.add__flexBox .add__dd {
-  margin-left: 3.6rem;
-  margin-bottom: 0;
-  width: 50%;
-}
-.add__flexBox .add__dd input {
+.signup .signup__container .signup__box .signup__inner input {
   position: relative;
-  width: 100%;
   line-height: 2rem;
+  width: 100%;
+  margin-bottom: 0.6rem;
 }
-.add__flexBox .add__dd input[type=date] {
-  width: 60%;
+.signup .signup__container .signup__box .signup__inner .text-danger {
+  margin-top: 0rem;
 }
-.add__flexBox .add__dd .text-danger {
-  margin-top: 0.4rem;
+.signup .signup__container .signup__box .signup__inner .link-back {
+  display: block;
+  text-align: end;
+}
+.signup .signup__container .signup__box .signup__inner .btn {
+  width: 100%;
+  margin-bottom: 0.6rem;
+}
+.signup .signup__container .signup__box .signup__inner .btn-signup {
+  background-color: #970747;
+  color: #ffffff;
 }

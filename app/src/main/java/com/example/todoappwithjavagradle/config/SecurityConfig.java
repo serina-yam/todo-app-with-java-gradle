@@ -28,9 +28,8 @@ public class SecurityConfig {
                 // CSRFの保護を無効にする
                 .csrf(csrf -> csrf.disable())
                 // アクセス制御の設定
-                .authorizeRequests(authorizeRequests ->
-                authorizeRequests
-                        .requestMatchers("/login", "/register").permitAll() // ログインページ、新規登録ページ、OAuth2エンドポイントは認証なしでアクセス可能
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                        .requestMatchers("/css/**", "/js/**", "/images/**","/login", "/signup").permitAll() // ログインページ、新規登録ページ、OAuth2エンドポイントは認証なしでアクセス可能
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin ->

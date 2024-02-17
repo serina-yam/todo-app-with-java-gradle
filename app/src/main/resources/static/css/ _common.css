@@ -16,13 +16,17 @@
   justify-content: flex-end;
   padding-bottom: 1.6rem;
 }
-.buttons .addBtn {
+.buttons .btn-add {
   background-color: #80c4d8;
-  color: #fff;
+  color: #ffffff;
   margin-right: 0.8rem;
 }
-.buttons .backBtn {
+.buttons .btn-back {
   background-color: #928178;
-  color: #fff;
+  color: #ffffff;
   margin-right: 0.8rem;
+}
+
+.text-danger {
+  color: #db4455;
 }
