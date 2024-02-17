@@ -26,6 +26,9 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "user_id")
+    private Integer user_id;
+
     @Column(name = "title")
     private String title;
 
@@ -40,6 +43,20 @@ public class Item {
 
     @Column(name = "updated_at")
     private java.sql.Timestamp updatedAt;
+
+    public Item() {
+
+    }
+    
+    public Item(Integer id, Integer user_id, String title, Integer state, Date timeLimit, Timestamp createdAt, Timestamp updatedAt) {
+        this.id = id;
+        this.user_id = user_id;
+        this.title = title;
+        this.state = state;
+        this.timeLimit = timeLimit;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 
     @PrePersist
     protected void onCreate() {

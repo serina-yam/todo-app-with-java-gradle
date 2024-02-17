@@ -32,24 +32,20 @@ public class SecurityConfig {
                         .requestMatchers("/css/**", "/js/**", "/images/**","/login", "/signup").permitAll() // ログインページ、新規登録ページ、OAuth2エンドポイントは認証なしでアクセス可能
                         .anyRequest().authenticated()
                 )
-                .formLogin(formLogin ->
-                        formLogin
+                .formLogin(formLogin -> formLogin
                                 .loginPage("/login") // ログインページのURL
                                 .defaultSuccessUrl("/")
                                 .permitAll()
                 )
-                .oauth2Login(oauth2Login ->
-                        oauth2Login
+                .oauth2Login(oauth2Login -> oauth2Login
                                 .loginPage("/login") // ログインページのURL
                                 .defaultSuccessUrl("/") // ログイン成功後のリダイレクト先
                 )
-                .formLogin(formLogin ->
-                        formLogin
+                .formLogin(formLogin -> formLogin
                                 .loginPage("/login") // ログインページのURL
                                 .permitAll()
                 )
-                .logout(logout ->
-                        logout
+                .logout(logout -> logout
                                 .logoutUrl("/logout")
                                 .logoutSuccessUrl("/login")
                 )

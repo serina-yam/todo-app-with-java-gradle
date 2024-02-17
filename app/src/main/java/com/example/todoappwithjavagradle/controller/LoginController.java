@@ -29,10 +29,12 @@ public class LoginController {
             clientRegistrations = (Iterable<ClientRegistration>) clientRegistrationRepository;
         }
 
-        clientRegistrations.forEach(registration -> 
-            oauth2AuthenticationUrls.put(registration.getClientName(), 
-            authorizationRequestBaseUri + "/" + registration.getRegistrationId()));
-        model.addAttribute("urls", oauth2AuthenticationUrls);
+        if (clientRegistrations != null) {
+            clientRegistrations.forEach(registration -> 
+                oauth2AuthenticationUrls.put(registration.getClientName(), 
+                authorizationRequestBaseUri + "/" + registration.getRegistrationId()));
+            model.addAttribute("urls", oauth2AuthenticationUrls);
+        }
 
         return "login";
     }
