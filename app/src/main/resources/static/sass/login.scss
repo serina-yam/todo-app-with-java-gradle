@@ -1,0 +1,96 @@
+// --------------------------------
+// ログイン画面
+// --------------------------------
+
+@import "./ _common.scss";
+
+.login {
+    // background-image: url(../../images/background.jpg);
+    background-color: $lightBrown;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+
+    // コンテナ
+    .login__container {
+        max-width: 1072px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        height: 100%;
+
+        // ボックス
+        .login__box {
+            background-color: $white;
+            border-radius: 10px;
+            box-shadow: 2px 2px 2px $subColor;
+            padding: 2.4rem;
+
+            .login__inner {
+                width: 70%;
+                margin: 0 auto;
+
+                .login__title {
+                    margin-bottom: 2.4rem;
+                }
+
+                input {
+                    position: relative;
+                    line-height: 2rem;
+                    width: 100%;
+                    margin-bottom: 0.6rem;
+                }
+
+                .text-danger {
+                    margin-top: 0rem;
+                }
+
+                .link-signup {
+                    display: block;
+                    text-align: end;
+                }
+
+                // ボタン設定
+                .btn {
+                    width: 100%;
+                    margin-bottom: 0.6rem;
+                }
+                .btn-login {
+                    background-color: $mainColor;
+                    color: $white;
+                }
+                .btn-github {
+                    background-color: $black;
+                    color: $white;
+                }
+                .btn-google {
+                    background-color: $blue;
+                    color: $white;
+                }
+
+                // 「または」の部分
+                .separator {
+                    margin: 20px 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    &::before,
+                    &::after {
+                        content: "";
+                        flex: 1;
+                        height: 1px;
+                        background-color: $gray;
+                    }
+
+                    .or {
+                        background-color: $white;
+                        padding: 0 10px;
+                    }
+                }
+            }
+        }
+    }
+}

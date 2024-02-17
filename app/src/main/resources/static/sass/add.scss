@@ -2,66 +2,67 @@
 // AddItem screen
 // --------------------------------
 
-@import './ _common.scss';
-
-
+@import "./ _common.scss";
 
 .add {
-  background-image: url(../../img/background.jpg);
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
+    background-image: url(../../images/background.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
 
+    // コンテナ
+    .add__container {
+        max-width: 1072px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        height: 100%;
 
-  // コンテナ
-  .add__container {
-    max-width: 1072px;
-    box-sizing: border-box;
+        // ボックス
+        .add__box {
+            background-color: $white;
+            border-radius: 10px;
+            box-shadow: 2px 2px 2px $subColor;
+            padding: 2.4rem;
+            width: 70%;
+
+            .add__title {
+                margin-bottom: 2.4rem;
+            }
+        }
+    }
+}
+
+// 横並び要素
+.add__flexBox {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    height: 100%;
+    margin-bottom: 2.4rem;
 
-    // ボックス
-    .add__box {
-      background-color: $white;
-      border-radius: 10px;
-      box-shadow: 2px 2px 2px $subColor;
-      padding: 2.4rem;
-      width: 70%;
-
-      .add__title {
-        margin-bottom: 2.4rem;
-      }
+    .add__dt {
+        width: 30%;
+        padding-top: 0.4rem;
     }
-  }
-}
 
+    // 入力エリア
+    .add__dd {
+        margin-left: 3.6rem;
+        margin-bottom: 0;
+        width: 50%;
 
-  // 横並び要素
-  .add__flexBox {
-  display: flex;
-  align-items: center;
-  margin-bottom: 2.4rem;
+        input {
+            position: relative;
+            width: 100%;
+            line-height: 2rem;
 
+            &[type="date"] {
+                width: 60%;
+            }
+        }
 
-  .add__dt {
-    width: 30%;
-
-  }
-
-  // 入力エリア
-  .add__dd {
-    margin-left: 3.6rem;
-    margin-bottom: 0;
-    width: 50%;
-
-    input {
-      width: 100%;
-      line-height: 2rem;
+        .text-danger {
+            margin-top: 0.4rem;
+        }
     }
-  }
 }
-
-
