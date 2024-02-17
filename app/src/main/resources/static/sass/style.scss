@@ -1,16 +1,16 @@
 // --------------------------------
 // 一覧画面
 // --------------------------------
-@import './ _common.scss';
+@import "./ _common.scss";
 
-.inner{
+.inner {
     width: 100%;
     max-width: 1072px;
     padding: 2.4rem;
     margin: 0 auto;
     overflow: hidden;
 
-    @media screen and (max-width: 480px){
+    @media screen and (max-width: 480px) {
         padding: 2.4rem;
     }
 }
@@ -20,11 +20,10 @@
 
     // 背景画像
     .top__bg {
-        background-image: url(../../img/background.jpg);
+        background-image: url(../../images/background.jpg);
         background-size: cover;
         background-position: center;
         height: 30vh;
-
     }
 
     // インナー
@@ -41,13 +40,12 @@
             align-items: center;
             justify-content: space-between;
 
-            .logoutBtn {
-                background-color: $grayColor;
+            .btn-logout {
+                background-color: $gray;
                 color: $white;
                 margin-right: 0.8rem;
             }
         }
-
     }
 
     // icon
@@ -70,9 +68,8 @@
         }
     }
 
-    .delBtn {
-            background-color: $subColor;
-            color: $white;
+    .btn-del {
+        background-color: $subColor;
+        color: $white;
     }
-
 }

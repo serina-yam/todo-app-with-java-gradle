@@ -16,15 +16,19 @@
   justify-content: flex-end;
   padding-bottom: 1.6rem;
 }
-.buttons .addBtn {
+.buttons .btn-add {
   background-color: #80c4d8;
-  color: #fff;
+  color: #ffffff;
   margin-right: 0.8rem;
 }
-.buttons .backBtn {
+.buttons .btn-back {
   background-color: #928178;
-  color: #fff;
+  color: #ffffff;
   margin-right: 0.8rem;
+}
+
+.text-danger {
+  color: #db4455;
 }
 
 .inner {
@@ -44,7 +48,7 @@
   margin-top: -1.5rem;
 }
 .top .top__bg {
-  background-image: url(../../img/background.jpg);
+  background-image: url(../../images/background.jpg);
   background-size: cover;
   background-position: center;
   height: 30vh;
@@ -62,9 +66,9 @@
   align-items: center;
   justify-content: space-between;
 }
-.top .top__inner .top__box .logoutBtn {
+.top .top__inner .top__box .btn-logout {
   background-color: #b3b3b3;
-  color: #fff;
+  color: #ffffff;
   margin-right: 0.8rem;
 }
 .top .top__icon .top__iconImg {
@@ -81,7 +85,7 @@
 #main .main__td .btn {
   float: right;
 }
-#main .delBtn {
+#main .btn-del {
   background-color: #928178;
-  color: #fff;
+  color: #ffffff;
 }
