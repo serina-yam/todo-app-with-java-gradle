@@ -9,7 +9,14 @@
             "extensions": [
                 "vscjava.vscode-java-pack",
                 "vscjava.vscode-spring-initializr",
-                "vscjava.vscode-gradle"
+                "vscjava.vscode-gradle",
+                "ckolkman.vscode-postgres",
+                "ritwickdey.LiveServer",
+                "glenn2223.live-sass",
+                "oderwat.indent-rainbow",
+                "esbenp.prettier-vscode",
+                "formulahendry.auto-rename-tag",
+                "vincaslt.highlight-matching-tag"
             ]
         }
     },
