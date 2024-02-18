@@ -5,8 +5,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Configuration
 @EnableWebSecurity
@@ -34,20 +36,18 @@ public class SecurityConfig {
                 )
                 .formLogin(formLogin -> formLogin
                                 .loginPage("/login") // ログインページのURL
-                                .defaultSuccessUrl("/")
+                                .defaultSuccessUrl("/login/success")
+                                .failureHandler(authenticationFailureHandler())
                                 .permitAll()
                 )
                 .oauth2Login(oauth2Login -> oauth2Login
                                 .loginPage("/login") // ログインページのURL
-                                .defaultSuccessUrl("/") // ログイン成功後のリダイレクト先
-                )
-                .formLogin(formLogin -> formLogin
-                                .loginPage("/login") // ログインページのURL
-                                .permitAll()
+                                .defaultSuccessUrl("/login/success") // ログイン成功後のリダイレクト先
                 )
                 .logout(logout -> logout
                                 .logoutUrl("/logout")
                                 .logoutSuccessUrl("/login")
+                                // TODO セッション削除の設定必要かもしれない
                 )
                 .csrf(csrf -> csrf.disable()); // CSRF保護を無効化
 
@@ -83,5 +83,22 @@ public class SecurityConfig {
                 source.registerCorsConfiguration("/**", configuration);
 
                 return source;
+        }
+
+        @Bean
+        public SimpleUrlAuthenticationFailureHandler authenticationFailureHandler() {
+                // エラーメッセージを設定
+                String errorMessage = "ログイン情報が正しくありません。再度試してください。";
+                
+                // エラーメッセージをURLエンコード
+                String encodedErrorMessage = UriComponentsBuilder.newInstance().queryParam("error", errorMessage).build().encode().toUriString();
+                
+                // リダイレクト先URLにエラーメッセージを追加
+                String redirectUrl = "/login" + encodedErrorMessage;
+                
+                SimpleUrlAuthenticationFailureHandler failureHandler = new SimpleUrlAuthenticationFailureHandler(redirectUrl);
+                failureHandler.setUseForward(false);
+
+                return failureHandler;
         }
 }

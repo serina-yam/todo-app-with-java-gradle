@@ -2,6 +2,7 @@ package com.example.todoappwithjavagradle.entity;
 
 import java.sql.Timestamp;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,16 +20,26 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @Column(name = "username")
-    private String username;
+    @Column(name = "user_id")
+    private Integer userId;
 
     @Column(name = "password_hash")
     private String passwordHash;
 
+    @Column(name = "login_type", nullable = false)
+    private String loginType;
+
+    @Column(name = "username", unique = true, nullable = false)
+    private String username;
+
+    @Column(name = "oauth2_user_id")
+    private String oauth2UserId;
+
     @Column(name = "email")
     private String email;
+
+    @Column(name = "profile_image_url")
+    private String profileImageUrl;
 
     @Column(name = "created_at")
     private java.sql.Timestamp createdAt;
@@ -39,9 +50,18 @@ public class User {
     public User() {
     }
 
-    public User(String username, String passwordHash) {
+    /**
+     * 
+     * @param username
+     * @param passwordHash
+     * @param oauth2UserId
+     * @param loginType
+     */
+    public User(String username, String passwordHash, String oauth2UserId, String loginType) {
         this.username = username;
         this.passwordHash = passwordHash;
+        this.oauth2UserId = oauth2UserId;
+        this.loginType = loginType;
     }
 
 

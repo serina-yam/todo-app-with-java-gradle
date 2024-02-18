@@ -27,7 +27,7 @@ public class Item {
     private Integer id;
 
     @Column(name = "user_id")
-    private Integer user_id;
+    private Integer userId;
 
     @Column(name = "title")
     private String title;
@@ -48,9 +48,9 @@ public class Item {
 
     }
     
-    public Item(Integer id, Integer user_id, String title, Integer state, Date timeLimit, Timestamp createdAt, Timestamp updatedAt) {
+    public Item(Integer id, Integer userId, String title, Integer state, Date timeLimit, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
-        this.user_id = user_id;
+        this.userId = userId;
         this.title = title;
         this.state = state;
         this.timeLimit = timeLimit;
