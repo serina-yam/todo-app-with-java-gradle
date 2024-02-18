@@ -8,14 +8,24 @@
         <section class="signup">
             <div class="signup__container">
                 <div class="signup__box">
-                    <form th:action="@{/signup}" method="post">
+                    <form id="loginForm" th:action="@{/signup}" method="post">
                         <div class="signup__inner">
                             <h2 class="signup__title">新規登録</h2>
                             <div>
-                                <input type="text" name="username" placeholder="Username" />
-                                <label class="text-danger" th:text="${usernameError}" th:if="${not #strings.isEmpty(usernameError)}"></label>
-                                <input type="password" name="password" placeholder="Password" />
-                                <label class="text-danger" th:text="${passwordError}" th:if="${not #strings.isEmpty(passwordError)}"></label>
+                                <input id="username" type="text" name="username" placeholder="Username" />
+                                <label
+                                    id="usernameError"
+                                    class="text-danger"
+                                    th:text="${usernameError}"
+                                    th:style="${#strings.isEmpty(usernameError)} ? 'display: none' : ''"
+                                ></label>
+                                <input id="password" type="password" name="password" placeholder="Password" />
+                                <label
+                                    id="passwordError"
+                                    class="text-danger"
+                                    th:text="${passwordError}"
+                                    th:style="${#strings.isEmpty(passwordError)} ? 'display: none' : ''"
+                                ></label>
                                 <button type="submit" class="btn btn-signup">登録</button>
                             </div>
                             <a th:href="@{/}" class="link-back">ログイン画面に戻る</a>

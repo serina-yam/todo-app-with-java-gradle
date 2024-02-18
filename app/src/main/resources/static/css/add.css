@@ -27,6 +27,11 @@
   margin-right: 0.8rem;
 }
 
+.text-danger {
+  color: #db4455;
+  white-space: nowrap;
+}
+
 .add {
   background-image: url(../../images/background.jpg);
   background-size: cover;
