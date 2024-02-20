@@ -6,8 +6,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+/**
+ * PasswordEncoderConfigのテストクラス
+ */
 public class PasswordEncoderConfigTests {
 
+    /**
+     * PasswordEncoderのBeanが正しく定義されていることをテスト
+     */
     @Test
     void testPasswordEncoderBean() {
         // テスト用のSpringアプリケーションコンテキストを作成

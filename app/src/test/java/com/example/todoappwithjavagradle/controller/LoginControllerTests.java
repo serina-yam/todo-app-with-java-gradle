@@ -8,7 +8,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.ui.Model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
+/**
+ * ログインコントローラーのテストクラス
+ */
 @ExtendWith(MockitoExtension.class)
 public class LoginControllerTests {
 
@@ -18,13 +22,22 @@ public class LoginControllerTests {
     @InjectMocks
     private LoginController loginController;
 
+    /**
+     * ログインページを取得するメソッドのテスト
+     */
     @Test
     public void testGetLoginPage() {
     
         // テスト対象メソッドの呼び出し
-        String result = loginController.getLoginPage(model);
+        String result = null;
+        try {
+            result = loginController.getLoginPage(model);
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail();
+        }
     
-        // 検証: モックに想定通りの呼び出しが行われたことを確認
+        // 検証
         assertEquals("login", result);
     }
     
