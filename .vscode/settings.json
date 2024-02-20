@@ -1,20 +1,33 @@
 {
-  // java
-  "java.configuration.updateBuildConfiguration": "automatic",
-  "java.compile.nullAnalysis.mode": "automatic",
-  // pretter
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true,
-  "prettier.printWidth": 180,
-  "prettier.tabWidth": 4,
-  // liveSassCompile
-  "liveSassCompile.settings.generateMap": false,
-  "liveSassCompile.settings.formats": [
-    {
-      "format": "expanded",
-      "extensionName": ".css",
-      "savePath": "/app/src/main/resources/static/css",
-      "savePathReplacementPairs": null
-    }
-  ]
+    // ファイルの末尾に改行を入れる
+    "files.insertFinalNewline": true,
+    // タブによるインデント設定
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false,
+    // java
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.compile.nullAnalysis.mode": "automatic",
+    // prettier
+    "[java]": {
+        "editor.tabSize": 4,
+        "java.format.settings.profile": "GoogleStyle",
+        "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml"
+    },
+    "[javascript]": {
+        "editor.tabSize": 2,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+    },
+    "editor.formatOnSave": true,
+    "prettier.printWidth": 180,
+    "prettier.tabWidth": 4,
+    // liveSassCompile
+    "liveSassCompile.settings.generateMap": false,
+    "liveSassCompile.settings.formats": [
+        {
+            "format": "expanded",
+            "extensionName": ".css",
+            "savePath": "/app/src/main/resources/static/css",
+            "savePathReplacementPairs": null
+        }
+    ]
 }
