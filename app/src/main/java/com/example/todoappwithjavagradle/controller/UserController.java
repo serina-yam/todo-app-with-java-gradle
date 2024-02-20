@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.todoappwithjavagradle.service.UserService;
 import com.example.todoappwithjavagradle.util.ErrorHandlingUtil;
 
+/**
+ * ユーザー関連のコントローラークラス
+ */
 @Controller
 @RequestMapping("/signup")
 public class UserController {
@@ -18,11 +21,24 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * サインアップフォームを表示する
+     * 
+     * @return サインアップフォームのテンプレート名
+     */
     @GetMapping
-    public String showRegistrationForm() {
+    public String showSignupForm() {
         return "signup"; // signup.htmlを返す
     }
 
+    /**
+     * ユーザーをサインアップする
+     * 
+     * @param username ユーザー名
+     * @param password パスワード
+     * @param model    モデル
+     * @return ログイン画面にリダイレクトする
+     */
     @PostMapping
     public String signupUser(@RequestParam("username") String username, @RequestParam("password") String password, Model model) {
         try {
@@ -35,6 +51,13 @@ public class UserController {
         }
     }
 
+    /**
+     * エラーハンドリングを行い、エラーページを表示する
+     * 
+     * @param ex    例外
+     * @param model モデル
+     * @return エラーページのテンプレート名
+     */
     private String handleError(Exception ex, Model model) {
         return ErrorHandlingUtil.handleError(ex, model);
     }

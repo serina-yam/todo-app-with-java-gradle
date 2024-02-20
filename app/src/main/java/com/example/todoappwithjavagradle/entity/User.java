@@ -13,6 +13,9 @@ import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+/**
+ * ユーザーエンティティクラス
+ */
 @Entity
 @Data
 @Table(name = "users")
@@ -51,11 +54,12 @@ public class User {
     }
 
     /**
+     * コンストラクタ
      * 
-     * @param username
-     * @param passwordHash
-     * @param oauth2UserId
-     * @param loginType
+     * @param username     ユーザー名
+     * @param passwordHash パスワードハッシュ
+     * @param oauth2UserId OAuth2 ユーザー ID
+     * @param loginType    ログインタイプ
      */
     public User(String username, String passwordHash, String oauth2UserId, String loginType) {
         this.username = username;
@@ -64,7 +68,9 @@ public class User {
         this.loginType = loginType;
     }
 
-
+    /**
+     * エンティティが作成されたときの処理
+     */
     @PrePersist
     protected void onCreate() {
         Timestamp ts = new Timestamp(System.currentTimeMillis());
@@ -72,6 +78,9 @@ public class User {
         this.updatedAt = ts;
     }
 
+    /**
+     * エンティティが更新されたときの処理
+     */
     @PreUpdate
     protected void onUpdate() {
         this.updatedAt = new Timestamp(System.currentTimeMillis());

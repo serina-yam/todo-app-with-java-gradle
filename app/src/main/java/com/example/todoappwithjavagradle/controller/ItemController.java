@@ -13,14 +13,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.validation.annotation.Validated;
 
-import com.example.todoappwithjavagradle.config.AttributeKey;
-import com.example.todoappwithjavagradle.dto.ItemRequest;
+import com.example.todoappwithjavagradle.Form.ItemRequest;
 import com.example.todoappwithjavagradle.entity.Item;
 import com.example.todoappwithjavagradle.service.ItemService;
+import com.example.todoappwithjavagradle.util.AttributeKey;
 import com.example.todoappwithjavagradle.util.ErrorHandlingUtil;
 
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * アイテム関連のコントローラークラス
+ */
 @Controller
 public class ItemController {
 
@@ -31,19 +34,22 @@ public class ItemController {
     HttpSession httpSession;
 
     /**
-     * アイテム情報一覧画面を表示
-     * @param model Model
+     * アイテム情報一覧画面を表示する
+     * 
+     * @param model Modelオブジェクト
      * @return アイテム情報一覧画面のHTML
      */
     @SuppressWarnings("null")
     @GetMapping(value = "/")
     public String displayList(Model model) {
         try {
-            Integer userId = (Integer) httpSession.getAttribute(AttributeKey.USER_ID.getValue());
-            if (userId == null) {
+            String userIdString = httpSession.getAttribute(AttributeKey.USER_ID.getValue()).toString();
+            if (userIdString == null) {
                 // userIdがセッションにない場合はログイン画面にリダイレクトする
                 return "redirect:/login";
             }
+            Integer userId = Integer.parseInt(userIdString);
+
             List<Item> itemlist = itemService.searchAll(userId);
             model.addAttribute(AttributeKey.ITEM_LIST.getValue(), itemlist);
             model.addAttribute(AttributeKey.USERNAME.getValue(), httpSession.getAttribute(AttributeKey.USERNAME.getValue()));
@@ -54,22 +60,25 @@ public class ItemController {
     }
 
     /**
-     * アイテム新規登録画面を表示
-     * @param model Model
+     * アイテム新規登録画面を表示する
+     * 
+     * @param model Modelオブジェクト
      * @return アイテム新規登録画面のHTML
      */
     @SuppressWarnings("null")
     @GetMapping(value = "/item/add")
     public String displayAdd(Model model) {
+        // TODO これ必要なのか確認
         model.addAttribute(AttributeKey.ITEM_LIST.getValue(), new ItemRequest());
         return "/item/add";
     }
 
     /**
-     * アイテム新規登録
-     * @param itemRequest リクエストデータ
-     * @param model Model
-     * @return アイテム情報一覧画面
+     * アイテムを新規登録する
+     * 
+     * @param itemRequest アイテムリクエストデータ
+     * @param model       Modelオブジェクト
+     * @return アイテム情報一覧画面へのリダイレクト
      */
     @PostMapping(value = "/item/create")
     public String create(@Validated @ModelAttribute ItemRequest itemRequest, BindingResult result, Model model) {
@@ -92,10 +101,11 @@ public class ItemController {
     }
 
      /**
-      * アイテム情報 削除
-      * @param id
-      * @param model
-      * @return アイテム情報一覧画面
+      * アイテム情報を削除する
+      * 
+      * @param id    削除対象のアイテムID
+      * @param model Modelオブジェクト
+      * @return アイテム情報一覧画面へのリダイレクト
       */
     @PostMapping(value = "/item/delete")
     public String delete(@RequestParam("id") Integer id, Model model) {
@@ -108,9 +118,10 @@ public class ItemController {
     }
 
     /**
-     * 共通のエラーハンドリングメソッド
-     * @param ex 発生した例外
-     * @param model Model
+     * 共通のエラーハンドリング
+     * 
+     * @param ex    発生した例外
+     * @param model Modelオブジェクト
      * @return エラーページのHTML
      */
     private String handleError(Exception ex, Model model) {

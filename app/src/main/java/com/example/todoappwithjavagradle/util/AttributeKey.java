@@ -1,7 +1,10 @@
-package com.example.todoappwithjavagradle.config;
+package com.example.todoappwithjavagradle.util;
 
 import lombok.Getter;
 
+/**
+ * モデルに使用される属性キーを表す列挙型
+ */
 @Getter
 public enum AttributeKey {
     USER_ID("userId"),

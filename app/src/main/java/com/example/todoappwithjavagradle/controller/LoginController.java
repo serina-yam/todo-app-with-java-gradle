@@ -18,18 +18,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.todoappwithjavagradle.config.AttributeKey;
-import com.example.todoappwithjavagradle.config.LoginType;
 import com.example.todoappwithjavagradle.entity.User;
 import com.example.todoappwithjavagradle.repository.UserRepository;
 import com.example.todoappwithjavagradle.service.UserService;
+import com.example.todoappwithjavagradle.util.AttributeKey;
+import com.example.todoappwithjavagradle.util.LoginType;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.http.HttpSession;
 
 
-
+/**
+ * ログイン関連のコントローラークラス
+ */
 @Controller
 public class LoginController {
 
@@ -54,11 +56,12 @@ public class LoginController {
     private HttpSession httpSession;
 
     /**
-     * ログイン成功時の処理.
-     * @param authentication
-     * @param redirectAttributes
-     * @return
-     * @throws Exception
+     * ログイン成功時の処理
+     * 
+     * @param authentication     認証情報
+     * @param redirectAttributes リダイレクトの属性
+     * @return ホーム画面へのリダイレクト
+     * @throws UsernameNotFoundException ユーザーが見つからない場合にスローされる例外
      */
     @SuppressWarnings("null")
     @GetMapping("/login/success")
@@ -123,10 +126,11 @@ public class LoginController {
     
 
     /**
-     * ログイン画面表示処理.
-     * @param model
-     * @return 
-     * @throws Exception
+     * ログイン画面表示処理
+     * 
+     * @param model モデル
+     * @return ログイン画面のテンプレート名
+     * @throws Exception 例外
      */
     @SuppressWarnings({ "unchecked", "null" })
     @GetMapping("/login")

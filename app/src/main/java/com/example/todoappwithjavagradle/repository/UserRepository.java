@@ -5,8 +5,25 @@ import org.springframework.stereotype.Repository;
 
 import com.example.todoappwithjavagradle.entity.User;
 
+/**
+ * ユーザーエンティティにアクセスするためのリポジトリインターフェース
+ */
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
+
+    /**
+     * 指定されたユーザー名に対応するユーザーエンティティを取得
+     *
+     * @param username ユーザー名
+     * @return ユーザーエンティティ
+     */
     User findByUsername(String username);
+
+    /**
+     * 指定されたOAuth2ユーザーIDに対応するユーザーエンティティを取得
+     *
+     * @param oauth2UserId OAuth2ユーザーID
+     * @return ユーザーエンティティ
+     */
     User findByOauth2UserId(String oauth2UserId);
 }
