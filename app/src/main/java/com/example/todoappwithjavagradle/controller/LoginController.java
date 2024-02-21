@@ -28,7 +28,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.http.HttpSession;
 
-
 /**
  * ログイン関連のコントローラークラス
  */
@@ -48,7 +47,7 @@ public class LoginController {
 
     @Autowired
     private UserRepository userRepository;
-   
+
     @Autowired
     private ClientRegistrationRepository clientRegistrationRepository;
 
@@ -66,8 +65,9 @@ public class LoginController {
     @SuppressWarnings("null")
     @GetMapping("/login/success")
     @Transactional
-    public String loginSuccess(Authentication authentication, RedirectAttributes redirectAttributes) throws UsernameNotFoundException {
-        
+    public String loginSuccess(Authentication authentication, RedirectAttributes redirectAttributes)
+            throws UsernameNotFoundException {
+
         // データなし
         if (!authentication.isAuthenticated()) {
             return "redirect:/";
@@ -76,18 +76,17 @@ public class LoginController {
         // フォーム画面の場合
         Integer userId = null;
         String username = null;
-        if(authentication.getPrincipal() instanceof String) {
+        if (authentication.getPrincipal() instanceof String) {
             // userId取得
             username = authentication.getPrincipal().toString();
             User info = userRepository.findByUsername(username);
             if (info == null) {
-                // TODO 違う例外の方が良いかも
-                throw new UsernameNotFoundException("User not found: " + authentication.getPrincipal());
+                throw new UsernameNotFoundException("ユーザーが見つかりません: " + authentication.getPrincipal());
             }
 
             userId = info.getUserId();
         }
-    
+
         // プロバイダー認証の場合
         if (authentication.getPrincipal() instanceof OAuth2User) {
 
@@ -114,16 +113,14 @@ public class LoginController {
                 userId = info.getUserId();
             }
         }
-        
 
         httpSession.setAttribute(AttributeKey.USER_ID.getValue(), userId);
         httpSession.setAttribute(AttributeKey.USERNAME.getValue(), username);
         logger.info("Session USER_ID: {}", httpSession.getAttribute(AttributeKey.USER_ID.getValue()));
         logger.info("Attribute USERNAME: {}", httpSession.getAttribute(AttributeKey.USERNAME.getValue()));
-    
+
         return "redirect:/"; // ホーム画面へリダイレクト
     }
-    
 
     /**
      * ログイン画面表示処理
@@ -144,9 +141,8 @@ public class LoginController {
         }
 
         if (clientRegistrations != null) {
-            clientRegistrations.forEach(registration -> 
-                oauth2AuthenticationUrls.put(registration.getClientName(), 
-                authorizationRequestBaseUri + "/" + registration.getRegistrationId()));
+            clientRegistrations.forEach(registration -> oauth2AuthenticationUrls.put(registration.getClientName(),
+                    authorizationRequestBaseUri + "/" + registration.getRegistrationId()));
             model.addAttribute(AttributeKey.URLS.getValue(), oauth2AuthenticationUrls);
         }
 

@@ -12,12 +12,13 @@ import org.springframework.stereotype.Service;
  * カスタムユーザーの詳細サービスクラス
  */
 @Service
-public class CustomUserDetailsService implements UserDetailsService{
+public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserService userService;
 
     /**
      * コンストラクター
+     * 
      * @param userService ユーザーサービス
      */
     public CustomUserDetailsService(UserService userService) {
@@ -26,6 +27,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 
     /**
      * ユーザー名によるユーザーの詳細をロード
+     * 
      * @param username ユーザー名
      * @return ユーザーの詳細
      * @throws UsernameNotFoundException ユーザーが見つからない場合
@@ -35,14 +37,13 @@ public class CustomUserDetailsService implements UserDetailsService{
         com.example.todoappwithjavagradle.entity.User userEntity = userService.getUserByUsername(username);
 
         if (userEntity == null) {
-            // TODO 存在しないログイン情報
-            throw new UsernameNotFoundException("User not found: " + username);
+            // 存在しないログイン情報
+            throw new UsernameNotFoundException("ユーザーが見つかりません: " + username);
         }
 
         return new org.springframework.security.core.userdetails.User(
-            userEntity.getUserId().toString(), 
-            userEntity.getPasswordHash(), 
-            Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
-        );
+                userEntity.getUserId().toString(),
+                userEntity.getPasswordHash(),
+                Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")));
     }
 }
