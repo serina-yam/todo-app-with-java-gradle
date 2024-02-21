@@ -32,6 +32,10 @@
   white-space: nowrap;
 }
 
+.changed {
+  background-color: #FFFF99;
+}
+
 .error {
   background-color: #b7aea4;
   background-size: cover;

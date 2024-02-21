@@ -54,27 +54,29 @@ public class ItemControllerTests {
         when(itemService.searchAll(userId)).thenReturn(itemList);
         when(httpSession.getAttribute(AttributeKey.USER_ID.getValue())).thenReturn(userId);
 
-
         // テスト
-        itemController.displayList(model);
+        String actual = itemController.displayList(model);
 
         // 検証
         verify(itemService, times(1)).searchAll(userId);
         verify(model, times(1)).addAttribute("itemlist", itemList);
+
+        assertEquals("index", actual);
     }
 
     /**
      * アイテム追加画面の表示をテスト
      */
+    @SuppressWarnings("null")
     @Test
     public void testDisplayAdd() {
         // テスト
-        String result = itemController.displayAdd(model);
+        String actual = itemController.displayAdd(model);
 
         // 検証
         verify(model, times(1)).addAttribute(AttributeKey.ITEM_LIST.getValue(), new ItemRequest());
 
-        assertEquals("/item/add", result);
+        assertEquals("/item/add", actual);
     }
 
     /**
@@ -84,20 +86,19 @@ public class ItemControllerTests {
     public void testCreateWithErrors() {
         // モックの設定
         ItemRequest itemRequest = new ItemRequest();
-        BindingResult bindingResult = mock(BindingResult.class);        
+        BindingResult bindingResult = mock(BindingResult.class);
         when(bindingResult.hasErrors()).thenReturn(true); // エラーの中身はFormのテストで補完する
-    
+
         // テスト
-        String result = itemController.create(itemRequest, bindingResult, model);
-    
+        String actual = itemController.create(itemRequest, bindingResult, model);
+
         // 検証
         verify(bindingResult, times(1)).hasErrors();
         verify(itemService, never()).create(any(ItemRequest.class));
 
-        assertEquals("/item/add", result);
+        assertEquals("/item/add", actual);
 
     }
-    
 
     /**
      * エラーがない場合のアイテム作成をテスト

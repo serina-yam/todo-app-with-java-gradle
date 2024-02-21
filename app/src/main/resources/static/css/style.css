@@ -32,6 +32,10 @@
   white-space: nowrap;
 }
 
+.changed {
+  background-color: #FFFF99;
+}
+
 .inner {
   width: 100%;
   max-width: 1072px;
@@ -85,6 +89,10 @@
 }
 #main .main__td .btn {
   float: right;
+}
+#main .btn-update {
+  background-color: #928178;
+  color: #ffffff;
 }
 #main .btn-del {
   background-color: #928178;

@@ -1,9 +1,7 @@
 package com.example.todoappwithjavagradle.service;
 
-
 import java.text.SimpleDateFormat;
 import java.util.List;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,23 +19,22 @@ import jakarta.servlet.http.HttpSession;
 @Service
 public class ItemService {
 
-    @Autowired
-    ItemRepository itemRepository;
+  @Autowired
+  ItemRepository itemRepository;
 
-    @Autowired
-    private HttpSession httpSession;
+  @Autowired
+  private HttpSession httpSession;
 
-    /**
-     * 特定のユーザーに関連するすべてのアイテム情報を取得します。
-     *
-     * @param userId ユーザーID
-     * @return アイテム情報のリスト
-     */
-    public List<Item> searchAll(Integer userId) {
-        // アイテムTBLの内容を全検索
-        return itemRepository.findByUserId(userId);
-    }
-
+  /**
+   * 特定のユーザーに関連するすべてのアイテム情報を取得
+   *
+   * @param userId ユーザーID
+   * @return アイテム情報のリスト
+   */
+  public List<Item> searchAll(Integer userId) {
+    // アイテムTBLの内容を全検索
+    return itemRepository.findByUserIdOrderByCreatedAtAsc(userId);
+  }
 
   /**
    * 新しいアイテム情報を登録
@@ -54,7 +51,6 @@ public class ItemService {
     String formattedDate = simpleDateFormat.format(ItemRequest.getTimeLimit());
     java.sql.Date date = java.sql.Date.valueOf(formattedDate);
 
-
     item.setUserId(userId);
     item.setTitle(ItemRequest.getTitle());
     item.setState(0);
@@ -63,6 +59,15 @@ public class ItemService {
     itemRepository.save(item);
   }
 
+  /**
+   * 指定されたIDのアイテムの状態を更新する
+   *
+   * @param id    更新対象のアイテムID
+   * @param state 更新する状態
+   */
+  public void update(Integer id, Integer state) {
+    itemRepository.updateStateById(id, state);
+  }
 
   /**
    * 指定されたIDのアイテム情報を削除
@@ -75,5 +80,4 @@ public class ItemService {
     }
     itemRepository.deleteById(id);
   }
-
 }

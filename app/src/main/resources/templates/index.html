@@ -30,8 +30,9 @@
                         <tr>
                             <th>No.</th>
                             <th>タイトル</th>
-                            <th>済</th>
+                            <th>ステータス</th>
                             <th>期限</th>
+                            <th></th>
                             <th></th>
                         </tr>
                     </thead>
@@ -39,14 +40,27 @@
                         <tr th:each="item, count : ${itemlist}" th:object="${item}">
                             <td class="main__td" th:text="${count.index + 1}"></td>
                             <td class="main__td" th:text="*{title}"></td>
-                            <td class="main__td" th:text="*{state} == 0 ? '' : ${state}"></td>
+                            <td class="main__td">
+                                <select aria-label="Default select example" onchange="changeBackgroundColor(this)">
+                                    <option value="0" th:selected="*{state == 0}"></option>
+                                    <option value="1" th:selected="*{state == 1}">作業中</option>
+                                    <option value="2" th:selected="*{state == 2}">済</option>
+                                </select>
+                            </td>
                             <td class="main__td" th:text="${#dates.format(item.timeLimit, 'yyyy/MM/dd')}"></td>
-                            <form th:action="@{/item/delete}" method="post">
-                                <td class="main__td">
+                            <td class="main__td">
+                                <form id="updateForm" th:action="@{/item/update}" method="post" onsubmit="setSelectedState(this)">
+                                    <input type="hidden" name="id" th:value="*{id}" />
+                                    <input type="hidden" id="stateInput" name="state" th:value="*{state}" />
+                                    <input class="btn btn-update" type="submit" value="更新" />
+                                </form>
+                            </td>
+                            <td>
+                                <form th:action="@{/item/delete}" method="post">
                                     <input type="hidden" name="id" th:value="*{id}" />
                                     <input class="btn btn-del" type="submit" value="削除" />
-                                </td>
-                            </form>
+                                </form>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

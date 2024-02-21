@@ -39,7 +39,8 @@ public class CustomUserDetailsServiceTests {
     @CsvFileSource(resources = "/user_test_data.csv", numLinesToSkip = 1)
     public void testLoadUserByUsername(Integer userId, String username, String passwordHash) {
         // モックの設定
-        com.example.todoappwithjavagradle.entity.User user = new com.example.todoappwithjavagradle.entity.User(username, passwordHash, null, LoginType.FORM.toString());
+        com.example.todoappwithjavagradle.entity.User user = new com.example.todoappwithjavagradle.entity.User(username,
+                passwordHash, null, LoginType.FORM.toString());
         user.setUserId(userId);
         when(userService.getUserByUsername(username)).thenReturn(user);
 
@@ -69,8 +70,7 @@ public class CustomUserDetailsServiceTests {
         // テストと検証
         UsernameNotFoundException exception = assertThrows(
                 UsernameNotFoundException.class,
-                () -> customUserDetailsService.loadUserByUsername(username)
-        );
-        assertEquals("User not found: " + username, exception.getMessage());
+                () -> customUserDetailsService.loadUserByUsername(username));
+        assertEquals("ユーザーが見つかりません: " + username, exception.getMessage());
     }
 }
