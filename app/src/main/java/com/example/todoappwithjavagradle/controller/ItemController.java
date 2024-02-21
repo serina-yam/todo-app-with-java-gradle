@@ -52,7 +52,8 @@ public class ItemController {
 
             List<Item> itemlist = itemService.searchAll(userId);
             model.addAttribute(AttributeKey.ITEM_LIST.getValue(), itemlist);
-            model.addAttribute(AttributeKey.USERNAME.getValue(), httpSession.getAttribute(AttributeKey.USERNAME.getValue()));
+            model.addAttribute(AttributeKey.USERNAME.getValue(),
+                    httpSession.getAttribute(AttributeKey.USERNAME.getValue()));
             return "index";
         } catch (Exception ex) {
             return handleError(ex, model);
@@ -68,8 +69,7 @@ public class ItemController {
     @SuppressWarnings("null")
     @GetMapping(value = "/item/add")
     public String displayAdd(Model model) {
-        // TODO これ必要なのか確認
-        model.addAttribute(AttributeKey.ITEM_LIST.getValue(), new ItemRequest());
+        model.addAttribute(AttributeKey.ITEM_REQUEST.getValue(), new ItemRequest());
         return "/item/add";
     }
 
@@ -82,7 +82,7 @@ public class ItemController {
      */
     @PostMapping(value = "/item/create")
     public String create(@Validated @ModelAttribute ItemRequest itemRequest, BindingResult result, Model model) {
-        
+
         if (result.hasErrors()) {
             // 入力チェックエラーの場合はエラーメッセージを表示して登録画面に戻る
             for (FieldError error : result.getFieldErrors()) {
@@ -100,13 +100,32 @@ public class ItemController {
         }
     }
 
-     /**
-      * アイテム情報を削除する
-      * 
-      * @param id    削除対象のアイテムID
-      * @param model Modelオブジェクト
-      * @return アイテム情報一覧画面へのリダイレクト
-      */
+    /**
+     * アイテムの状態を更新する
+     * 
+     * @param id    更新対象のアイテムID
+     * @param state 更新する状態
+     * @param model Modelオブジェクト
+     * @return アイテム情報一覧画面へのリダイレクト
+     */
+    @PostMapping(value = "/item/update")
+    public String update(@RequestParam("id") Integer id, @RequestParam("state") Integer state, Model model) {
+        try {
+
+            itemService.update(id, state);
+            return "redirect:/";
+        } catch (Exception ex) {
+            return handleError(ex, model);
+        }
+    }
+
+    /**
+     * アイテム情報を削除する
+     * 
+     * @param id    削除対象のアイテムID
+     * @param model Modelオブジェクト
+     * @return アイテム情報一覧画面へのリダイレクト
+     */
     @PostMapping(value = "/item/delete")
     public String delete(@RequestParam("id") Integer id, Model model) {
         try {

@@ -27,18 +27,18 @@ public class LoginControllerTests {
      */
     @Test
     public void testGetLoginPage() {
-    
+
         // テスト対象メソッドの呼び出し
-        String result = null;
+        String actual = null;
         try {
-            result = loginController.getLoginPage(model);
+            actual = loginController.getLoginPage(model);
         } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
-    
+
         // 検証
-        assertEquals("login", result);
+        assertEquals("login", actual);
     }
-    
+
 }
