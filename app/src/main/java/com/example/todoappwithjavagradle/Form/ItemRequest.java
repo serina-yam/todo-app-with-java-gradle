@@ -1,4 +1,4 @@
-package com.example.todoappwithjavagradle.dto;
+package com.example.todoappwithjavagradle.Form;
 
 import java.util.Date;
 
@@ -13,23 +13,22 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 /**
- * アイテム情報 リクエストデータ
+ * アイテム情報のリクエストデータを表すフォームクラス
  */
 @Data
 public class ItemRequest implements Serializable {
 
   /**
-   * タイトル
+   * アイテムのタイトル
    */
   @NotEmpty(message = "タイトルを入力してください")
   @Size(max = 100, message = "タイトルは100桁以内で入力してください")
   private String title;
 
   /**
-   * 期限
+   * アイテムの期限
    */
   @NotNull(message = "期限を入力してください")
-  // @Size(max = 255, message = "期限は今日以降の日付を入力してください")
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   private Date timeLimit;
 

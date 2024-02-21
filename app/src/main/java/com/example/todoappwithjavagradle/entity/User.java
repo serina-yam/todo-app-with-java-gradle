@@ -2,6 +2,7 @@ package com.example.todoappwithjavagradle.entity;
 
 import java.sql.Timestamp;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,6 +13,9 @@ import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+/**
+ * ユーザーエンティティクラス
+ */
 @Entity
 @Data
 @Table(name = "users")
@@ -19,16 +23,26 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @Column(name = "username")
-    private String username;
+    @Column(name = "user_id")
+    private Integer userId;
 
     @Column(name = "password_hash")
     private String passwordHash;
 
+    @Column(name = "login_type", nullable = false)
+    private String loginType;
+
+    @Column(name = "username", unique = true, nullable = false)
+    private String username;
+
+    @Column(name = "oauth2_user_id")
+    private String oauth2UserId;
+
     @Column(name = "email")
     private String email;
+
+    @Column(name = "profile_image_url")
+    private String profileImageUrl;
 
     @Column(name = "created_at")
     private java.sql.Timestamp createdAt;
@@ -39,12 +53,24 @@ public class User {
     public User() {
     }
 
-    public User(String username, String passwordHash) {
+    /**
+     * コンストラクタ
+     * 
+     * @param username     ユーザー名
+     * @param passwordHash パスワードハッシュ
+     * @param oauth2UserId OAuth2 ユーザー ID
+     * @param loginType    ログインタイプ
+     */
+    public User(String username, String passwordHash, String oauth2UserId, String loginType) {
         this.username = username;
         this.passwordHash = passwordHash;
+        this.oauth2UserId = oauth2UserId;
+        this.loginType = loginType;
     }
 
-
+    /**
+     * エンティティが作成されたときの処理
+     */
     @PrePersist
     protected void onCreate() {
         Timestamp ts = new Timestamp(System.currentTimeMillis());
@@ -52,6 +78,9 @@ public class User {
         this.updatedAt = ts;
     }
 
+    /**
+     * エンティティが更新されたときの処理
+     */
     @PreUpdate
     protected void onUpdate() {
         this.updatedAt = new Timestamp(System.currentTimeMillis());

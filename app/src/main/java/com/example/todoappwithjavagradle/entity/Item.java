@@ -15,7 +15,7 @@ import lombok.Data;
 
 
 /**
- * ユーザー情報 Entity
+ * アイテム情報エンティティクラス
  */
 @Entity
 @Data
@@ -27,7 +27,7 @@ public class Item {
     private Integer id;
 
     @Column(name = "user_id")
-    private Integer user_id;
+    private Integer userId;
 
     @Column(name = "title")
     private String title;
@@ -45,12 +45,22 @@ public class Item {
     private java.sql.Timestamp updatedAt;
 
     public Item() {
-
     }
     
-    public Item(Integer id, Integer user_id, String title, Integer state, Date timeLimit, Timestamp createdAt, Timestamp updatedAt) {
+    /**
+     * コンストラクタ
+     * 
+     * @param id         アイテムID
+     * @param userId     ユーザーID
+     * @param title      タイトル
+     * @param state      状態
+     * @param timeLimit  期限
+     * @param createdAt  作成日時
+     * @param updatedAt  更新日時
+     */
+    public Item(Integer id, Integer userId, String title, Integer state, Date timeLimit, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
-        this.user_id = user_id;
+        this.userId = userId;
         this.title = title;
         this.state = state;
         this.timeLimit = timeLimit;
@@ -58,6 +68,9 @@ public class Item {
         this.updatedAt = updatedAt;
     }
 
+    /**
+     * エンティティが作成されたときの処理
+     */
     @PrePersist
     protected void onCreate() {
         Timestamp ts = new Timestamp(System.currentTimeMillis());
@@ -65,6 +78,9 @@ public class Item {
         this.updatedAt = ts;
     }
 
+    /**
+     * エンティティが更新されたときの処理
+     */
     @PreUpdate
     protected void onUpdate() {
         this.updatedAt = new Timestamp(System.currentTimeMillis());

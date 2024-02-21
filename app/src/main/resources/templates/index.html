@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head th:replace="common/head :: head_fragment('Item List',~{::link},~{::script})">
+    <head th:replace="~{common/head :: head_fragment('Item List',~{::link},~{::script})}">
         <link rel="stylesheet" th:href="@{/css/style.css}" />
         <script type="text/javascript" th:src="@{/js/main.js}"></script>
     </head>
@@ -13,7 +13,8 @@
                     <img class="top__iconImg" src="/images/check.png" alt="check" />
                 </figure>
                 <div class="top__box">
-                    <h1>TODO LIST</h1>
+                    <h2 th:if="${username == null}">TODO LIST</h2>
+                    <h2 th:if="${username != null}" th:text="|${username}さんのTODO LIST|"></h2>
                     <a th:href="@{/logout}" class="btn btn-logout">ログアウト</a>
                 </div>
             </div>
@@ -52,6 +53,6 @@
             </div>
         </section>
 
-        <th:block th:include="common/scripts"></th:block>
+        <th:block th:insert="~{common/scripts}"></th:block>
     </body>
 </html>

@@ -26,11 +26,11 @@ services:
         volumes:
             - ./init_db:/docker-entrypoint-initdb.d
 
-        # Webベースのデータベース管理ツール
-        adminer:
-            image: adminer:4.8.1
-            container_name: adminer
-            ports:
-                - "9000:8080"
-            depends_on:
-                - db
+    # Webベースのデータベース管理ツール
+    adminer:
+        image: adminer:4.8.1
+        container_name: adminer
+        ports:
+            - "9000:8080"
+        depends_on:
+            - db

@@ -8,8 +8,16 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * DateUtilsクラスのテストクラス
+ */
 public class DateUtilsTests {
 
+    /**
+     * parseDateメソッドのテスト
+     *
+     * @throws ParseException 解析エラーが発生した場合
+     */
     @Test
     public void testParseDate() throws ParseException {
         // テストデータ
