@@ -32,6 +32,10 @@
   white-space: nowrap;
 }
 
+.changed {
+  background-color: #FFFF99;
+}
+
 .add {
   background-image: url(../../images/background.jpg);
   background-size: cover;

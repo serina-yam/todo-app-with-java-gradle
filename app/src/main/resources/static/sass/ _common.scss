@@ -9,6 +9,7 @@ $white: #ffffff;
 $lightBrown: #b7aea4;
 $red: #db4455;
 $blue: #4285f4;
+$lightBlue: #ADD8E6;
 
 // ---------------- フォント ----------------
 @mixin noto {
@@ -51,4 +52,9 @@ $blue: #4285f4;
 .text-danger {
     color: $red;
     white-space: nowrap;
+}
+
+// ---------------- 状態 -----------------
+.changed {
+    background-color: #FFFF99;
 }

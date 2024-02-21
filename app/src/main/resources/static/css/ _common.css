@@ -31,3 +31,7 @@
   color: #db4455;
   white-space: nowrap;
 }
+
+.changed {
+  background-color: #FFFF99;
+}
