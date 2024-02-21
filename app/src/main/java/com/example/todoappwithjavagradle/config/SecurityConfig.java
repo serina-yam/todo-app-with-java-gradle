@@ -56,8 +56,8 @@ public class SecurityConfig {
 				.logout(logout -> logout
 						.logoutUrl("/logout")
 						.logoutSuccessUrl("/login")
-				// TODO セッション削除の設定必要かもしれない
-				)
+						.invalidateHttpSession(true)
+						.deleteCookies("JSESSIONID"))
 				.csrf(csrf -> csrf.disable()); // CSRF保護を無効化
 
 		return http.build();
