@@ -8,7 +8,7 @@ jobs:
   build:
     # Runnerを指定
     runs-on: ubuntu-latest
-    
+
     services:
       # PostgreSQLのサービスを定義
       postgres:
@@ -35,41 +35,50 @@ jobs:
       SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GITHUB_CLIENT_SECRET: ${{ secrets.OAUTH_GITHUB_CLIENT_SECRET }}
 
     steps:
-    # RunnnerにGitリポジトリのコピーをダウンロード
-    - name: Checkout repository
-      uses: actions/checkout@v3
-      
-    # dockerizeをインストール
-    - name: Install dockerize
-      run: |
-        wget https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz
-        tar -xzvf dockerize-linux-amd64-v0.6.1.tar.gz
-        sudo mv dockerize /usr/local/bin/dockerize
-        rm dockerize-linux-amd64-v0.6.1.tar.gz
-      
-    # Java 17をセットアップ
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'adopt'
-        java-version: '17'
+      # RunnnerにGitリポジトリのコピーをダウンロード
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    # PostgreSQLの起動を待機
-    - name: Wait for PostgreSQL to start
-      run: dockerize -wait tcp://localhost:5432 -timeout 1m
+      # dockerizeをインストール
+      - name: Install dockerize
+        run: |
+          wget https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz
+          tar -xzvf dockerize-linux-amd64-v0.6.1.tar.gz
+          sudo mv dockerize /usr/local/bin/dockerize
+          rm dockerize-linux-amd64-v0.6.1.tar.gz
 
-    # PostgreSQLにpgcrypto拡張機能を作成
-    - name: Create extension pgcrypto
-      run: docker exec -i ${{ job.services.postgres.id }} psql -U ${{ secrets.POSTGRES_USER }} -d ${{ secrets.POSTGRES_DB }} -c "CREATE EXTENSION IF NOT EXISTS pgcrypto;"
+      # Java 17をセットアップ
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: "adopt"
+          java-version: "17"
 
-    # Build
-    - name: Build with Gradle
-      run: |
-        cd app
-        ./gradlew build
-      
-    # Test実行
-    - name: Run tests
-      run: |
-        cd app
-        ./gradlew test
+      # PostgreSQLの起動を待機
+      - name: Wait for PostgreSQL to start
+        run: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      # PostgreSQLにpgcrypto拡張機能を作成
+      - name: Create extension pgcrypto
+        run: docker exec -i ${{ job.services.postgres.id }} psql -U ${{ secrets.POSTGRES_USER }} -d ${{ secrets.POSTGRES_DB }} -c "CREATE EXTENSION IF NOT EXISTS pgcrypto;"
+
+      # Build
+      - name: Build with Gradle
+        run: |
+          cd app
+          ./gradlew build
+
+      # Test実行
+      - name: Run tests
+        run: |
+          cd app
+          ./gradlew test
+
+      # Dangerのセットアップ
+      - name: Install Danger
+        run: |
+          npm install -g danger
+
+      # Dangerを実行し、TODOコメントがあれば警告を出す
+      - name: Run Danger
+        run: danger
