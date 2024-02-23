@@ -74,7 +74,7 @@ public class ItemControllerTests {
         String actual = itemController.displayAdd(model);
 
         // 検証
-        verify(model, times(1)).addAttribute(AttributeKey.ITEM_LIST.getValue(), new ItemRequest());
+        verify(model, times(1)).addAttribute(AttributeKey.ITEM_REQUEST.getValue(), new ItemRequest());
 
         assertEquals("/item/add", actual);
     }
