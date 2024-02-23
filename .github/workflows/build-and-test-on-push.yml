@@ -1,8 +1,11 @@
 name: Build and Test on Push
 
-# pushをEventに設定
+# Event設定
 on:
-  - push
+  pull_request:
+    branches:
+      - main
+      - dev
 
 jobs:
   build:
