@@ -116,8 +116,8 @@ public class LoginController {
 
         httpSession.setAttribute(AttributeKey.USER_ID.getValue(), userId);
         httpSession.setAttribute(AttributeKey.USERNAME.getValue(), username);
-        logger.info("Session USER_ID: {}", httpSession.getAttribute(AttributeKey.USER_ID.getValue()));
-        logger.info("Attribute USERNAME: {}", httpSession.getAttribute(AttributeKey.USERNAME.getValue()));
+        logger.info("Session USER_ID: {}", userId);
+        logger.info("Attribute USERNAME: {}", username);
 
         return "redirect:/"; // ホーム画面へリダイレクト
     }
