@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.todoappwithjavagradle.entity.User;
 import com.example.todoappwithjavagradle.service.UserService;
+import com.example.todoappwithjavagradle.util.AttributeKey;
 import com.example.todoappwithjavagradle.util.ErrorHandlingUtil;
 
 /**
@@ -28,7 +30,7 @@ public class UserController {
      */
     @GetMapping
     public String showSignupForm() {
-        return "signup"; // signup.htmlを返す
+        return "signup";
     }
 
     /**
@@ -40,12 +42,22 @@ public class UserController {
      * @return ログイン画面にリダイレクトする
      */
     @PostMapping
-    public String signupUser(@RequestParam("username") String username, @RequestParam("password") String password, Model model) {
+    public String signupUser(@RequestParam("username") String username, @RequestParam("password") String password,
+            Model model) {
         try {
+
+            User existUser = userService.getUserByUsername(username);
+            if (existUser != null) {
+                String errorMessage = "このユーザー名は使用されています";
+                model.addAttribute(AttributeKey.ERROR_MESSAGE.getValue(), errorMessage);
+                return "/signup";
+            }
+
             userService.signupUserFromForm(username, password);
 
-            // TODO 登録が成功したことがわかるようにする
-            return "redirect:/login"; // 登録後はログイン画面にリダイレクトする
+            String successMessage = "登録が完了しました！ログインできます。";
+            model.addAttribute(AttributeKey.SUCCESS_MESSAGE.getValue(), successMessage);
+            return "/login"; // 登録後はログイン画面に遷移
         } catch (Exception ex) {
             return handleError(ex, model);
         }

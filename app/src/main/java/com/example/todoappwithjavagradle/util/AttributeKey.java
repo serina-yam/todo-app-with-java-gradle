@@ -12,8 +12,8 @@ public enum AttributeKey {
     ITEM_LIST("itemlist"),
     ITEM_REQUEST("itemRequest"),
     URLS("urls"),
-    ERROR_MESSAGE("errorMessage")
-    ;
+    ERROR_MESSAGE("errorMessage"),
+    SUCCESS_MESSAGE("successMessage");
 
     private final String value;
 

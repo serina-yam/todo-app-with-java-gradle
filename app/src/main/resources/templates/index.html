@@ -56,7 +56,7 @@
                                 </form>
                             </td>
                             <td>
-                                <form th:action="@{/item/delete}" method="post">
+                                <form th:action="@{/item/delete}" method="post" onsubmit="return confirmDelete(this)">
                                     <input type="hidden" name="id" th:value="*{id}" />
                                     <input class="btn btn-del" type="submit" value="削除" />
                                 </form>
