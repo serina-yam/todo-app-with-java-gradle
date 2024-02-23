@@ -59,6 +59,7 @@ jacoco {
 }
 
 test {
+		finalizedBy jacocoTestReport
     jacoco {
         enabled = true
         destinationFile = file("$buildDir/jacoco/test.exec")
@@ -67,9 +68,9 @@ test {
 
 jacocoTestReport {
     reports {
-        xml.enabled false
+        xml.enabled true
         csv.enabled false
-        html.destination file("$buildDir/reports/jacoco/html")
+        html.enabled true
     }
 }
 

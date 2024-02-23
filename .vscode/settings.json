@@ -2,7 +2,7 @@
     // ファイルの末尾に改行を入れる
     "files.insertFinalNewline": true,
     // タブによるインデント設定
-    "editor.tabSize": 4,
+    "editor.tabSize": 2,
     "editor.insertSpaces": false,
     // java
     "java.configuration.updateBuildConfiguration": "automatic",
@@ -19,7 +19,7 @@
     },
     "editor.formatOnSave": true,
     "prettier.printWidth": 180,
-    "prettier.tabWidth": 4,
+    "prettier.tabWidth": 2,
     // liveSassCompile
     "liveSassCompile.settings.generateMap": false,
     "liveSassCompile.settings.formats": [
@@ -29,5 +29,7 @@
             "savePath": "/app/src/main/resources/static/css",
             "savePathReplacementPairs": null
         }
-    ]
+    ],
+    // Coverage Gutters
+    "coverage-gutters.coverageFileNames": ["jacocoTestReport.xml"]
 }
