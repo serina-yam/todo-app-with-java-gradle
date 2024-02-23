@@ -2,7 +2,6 @@ package com.example.todoappwithjavagradle.entity;
 
 import java.sql.Timestamp;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,12 +36,6 @@ public class User {
 
     @Column(name = "oauth2_user_id")
     private String oauth2UserId;
-
-    @Column(name = "email")
-    private String email;
-
-    @Column(name = "profile_image_url")
-    private String profileImageUrl;
 
     @Column(name = "created_at")
     private java.sql.Timestamp createdAt;
