@@ -24,7 +24,7 @@ public class SecurityConfig {
 	}
 
 	/**
-	 * Spring Securityのセキュリティフィルターチェーンを設定します。
+	 * Spring Securityのセキュリティフィルターチェーンを設定
 	 *
 	 * @param http HttpSecurityオブジェクト
 	 * @return SecurityFilterChainオブジェクト
