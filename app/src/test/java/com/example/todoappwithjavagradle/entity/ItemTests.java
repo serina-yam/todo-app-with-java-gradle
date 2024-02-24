@@ -10,26 +10,37 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
+/**
+ * アイテムエンティティのテストクラス
+ */
 public class ItemTests {
 
-	@Test
-	public void testConstructorAndGetters() {
-		Integer id = 1;
-		Integer userId = 123;
-		String title = "Test Title";
-		Integer state = 0;
-		Date timeLimit = new Date();
+	/**
+	 * コンストラクタとゲッターのテスト
+	 */
+	@ParameterizedTest
+	@CsvFileSource(resources = "/item_test_data.csv", numLinesToSkip = 1)
+	public void testConstructorAndGetters(Integer id, Integer userId, String title, Integer state) {
 
-		Item item = new Item(id, userId, title, state, timeLimit, null, null);
+		Date timeLimit = new Date();
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		Item item = new Item(id, userId, title, state, timeLimit, timestamp, timestamp);
 
 		assertEquals(id, item.getId());
 		assertEquals(userId, item.getUserId());
 		assertEquals(title, item.getTitle());
 		assertEquals(state, item.getState());
 		assertEquals(timeLimit, item.getTimeLimit());
+		assertNotNull(item.getCreatedAt());
+		assertNotNull(item.getUpdatedAt());
 	}
 
+	/**
+	 * アイテムの作成時にタイムスタンプが正しく設定されることをテスト
+	 */
 	@Test
 	public void testTimestampsOnCreate() {
 		Item item = new Item();
@@ -43,6 +54,9 @@ public class ItemTests {
 		assertEquals(item.getCreatedAt(), item.getUpdatedAt());
 	}
 
+	/**
+	 * アイテムの更新時にタイムスタンプが正しく更新されることをテスト
+	 */
 	@Test
 	public void testTimestampsOnUpdate() {
 		Item item = new Item();
@@ -62,7 +76,7 @@ public class ItemTests {
 
 		Timestamp updatedAt = item.getUpdatedAt();
 		assertNotNull(updatedAt);
-		assertEquals(createdAt, item.getCreatedAt()); // CreatedAt should not change on update
+		assertEquals(createdAt, item.getCreatedAt()); // createdAtは、更新されていないこと
 		assertNotEquals(createdAt, updatedAt);
 	}
 }

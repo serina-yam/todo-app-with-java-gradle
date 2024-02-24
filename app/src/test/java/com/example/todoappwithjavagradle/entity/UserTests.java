@@ -9,15 +9,21 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.sql.Timestamp;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
+/**
+ * ユーザーエンティティのテストクラス
+ */
 public class UserTests {
 
-	@Test
-	public void testConstructorAndGetters() {
-		String username = "testUser";
-		String passwordHash = "passwordHash";
-		String oauth2UserId = "oauth2UserId";
-		String loginType = "loginType";
+	/**
+	 * コンストラクタとゲッターのテスト
+	 */
+	@ParameterizedTest
+	@CsvFileSource(resources = "/user_test_data.csv", numLinesToSkip = 1)
+	public void testConstructorAndGetters(Integer userId, String loginType, String username, String passwordHash,
+			String oauth2UserId) {
 
 		User user = new User(username, passwordHash, oauth2UserId, loginType);
 
@@ -27,6 +33,9 @@ public class UserTests {
 		assertEquals(loginType, user.getLoginType());
 	}
 
+	/**
+	 * ユーザーの作成時にタイムスタンプが正しく設定されることをテスト
+	 */
 	@Test
 	public void testTimestampsOnCreate() {
 		User user = new User();
@@ -40,6 +49,9 @@ public class UserTests {
 		assertEquals(user.getCreatedAt(), user.getUpdatedAt());
 	}
 
+	/**
+	 * ユーザーの更新時にタイムスタンプが正しく更新されることをテスト
+	 */
 	@Test
 	public void testTimestampsOnUpdate() {
 		User user = new User();
@@ -59,7 +71,7 @@ public class UserTests {
 
 		Timestamp updatedAt = user.getUpdatedAt();
 		assertNotNull(updatedAt);
-		assertEquals(createdAt, user.getCreatedAt()); // CreatedAt should not change on update
+		assertEquals(createdAt, user.getCreatedAt()); // createdAtは、更新されていないこと
 		assertNotEquals(createdAt, updatedAt);
 	}
 }
