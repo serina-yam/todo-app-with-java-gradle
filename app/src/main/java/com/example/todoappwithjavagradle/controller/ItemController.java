@@ -15,9 +15,9 @@ import org.springframework.validation.annotation.Validated;
 
 import com.example.todoappwithjavagradle.Form.ItemRequest;
 import com.example.todoappwithjavagradle.entity.Item;
+import com.example.todoappwithjavagradle.exception.ErrorHandling;
 import com.example.todoappwithjavagradle.service.ItemService;
 import com.example.todoappwithjavagradle.util.AttributeKey;
-import com.example.todoappwithjavagradle.util.ErrorHandlingUtil;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -43,12 +43,12 @@ public class ItemController {
     @GetMapping(value = "/")
     public String displayList(Model model) {
         try {
-            String userIdString = httpSession.getAttribute(AttributeKey.USER_ID.getValue()).toString();
-            if (userIdString == null) {
+            Object userIdObj = httpSession.getAttribute(AttributeKey.USER_ID.getValue());
+            if (userIdObj == null) {
                 // userIdがセッションにない場合はログイン画面にリダイレクトする
                 return "redirect:/login";
             }
-            Integer userId = Integer.parseInt(userIdString);
+            Integer userId = Integer.parseInt(userIdObj.toString());
 
             List<Item> itemlist = itemService.searchAll(userId);
             model.addAttribute(AttributeKey.ITEM_LIST.getValue(), itemlist);
@@ -144,6 +144,6 @@ public class ItemController {
      * @return エラーページのHTML
      */
     private String handleError(Exception ex, Model model) {
-        return ErrorHandlingUtil.handleError(ex, model);
+        return ErrorHandling.handleError(ex, model);
     }
 }
