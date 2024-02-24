@@ -1,82 +1,96 @@
 package com.example.todoappwithjavagradle.config;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
+import java.util.Collections;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-// TODO テスト修正する
+/**
+ * CustomAuthenticationProvider のテストクラス
+ */
 public class CustomAuthenticationProviderTests {
 
-	// @Test
-	// public void authenticate_ValidCredentials_SuccessfulAuthentication() {
-	// // モックの設定
-	// UserDetailsService userDetailsService = mock(UserDetailsService.class);
-	// PasswordEncoder passwordEncoder = mock(PasswordEncoder.class);
-	// CustomAuthenticationProvider authProvider = new
-	// CustomAuthenticationProvider(userDetailsService,
-	// passwordEncoder);
+	/**
+	 * 認証成功時のテストを行う
+	 *
+	 * @param userId       ユーザーID
+	 * @param username     ユーザー名
+	 * @param password     パスワード
+	 * @param passwordHash エンコードされたパスワード
+	 */
+	@ParameterizedTest
+	@CsvFileSource(resources = "/user_test_data_oauth.csv", numLinesToSkip = 1)
+	public void testAuthenticate_Successful(String userId, String username, String password, String passwordHash) {
+		// モックの作成
+		UserDetailsService userDetailsService = mock(UserDetailsService.class);
+		PasswordEncoder passwordEncoder = mock(PasswordEncoder.class);
+		CustomAuthenticationProvider authenticationProvider = new CustomAuthenticationProvider(userDetailsService,
+				passwordEncoder);
 
-	// String username = "testUser";
-	// String password = "testPassword";
-	// UserDetails userDetails = User.withUsername(username)
-	// .password(passwordEncoder.encode(password))
-	// .roles("USER")
-	// .build();
+		// テストデータの設定
+		UserDetails userDetails = new User(username, passwordHash,
+				Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")));
 
-	// when(userDetailsService.loadUserByUsername(username)).thenReturn(userDetails);
-	// when(passwordEncoder.matches(password,
-	// userDetails.getPassword())).thenReturn(true);
+		// モックの動作設定
+		when(userDetailsService.loadUserByUsername(username)).thenReturn(userDetails);
+		when(passwordEncoder.matches(password, passwordHash)).thenReturn(true);
 
-	// UsernamePasswordAuthenticationToken authenticationToken = new
-	// UsernamePasswordAuthenticationToken(username,
-	// password);
+		// 認証オブジェクトの作成
+		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username,
+				password);
 
-	// // テスト
-	// UserDetails authenticatedUser = (UserDetails)
-	// authProvider.authenticate(authenticationToken).getPrincipal();
+		// 認証を実行
+		assertDoesNotThrow(() -> authenticationProvider.authenticate(authentication));
+	}
 
-	// // 検証
-	// assertEquals(userDetails, authenticatedUser);
-	// }
+	/**
+	 * 認証失敗時のテストを行う
+	 *
+	 * @param userId       ユーザーID
+	 * @param username     ユーザー名
+	 * @param password     パスワード
+	 * @param passwordHash エンコードされたパスワード
+	 */
+	@ParameterizedTest
+	@CsvFileSource(resources = "/user_test_data_oauth.csv", numLinesToSkip = 1)
+	public void testAuthenticate_Failure(String userId, String username, String password, String passwordHash) {
+		// モックの作成
+		UserDetailsService userDetailsService = mock(UserDetailsService.class);
+		PasswordEncoder passwordEncoder = mock(PasswordEncoder.class);
+		CustomAuthenticationProvider authenticationProvider = new CustomAuthenticationProvider(userDetailsService,
+				passwordEncoder);
 
-	// @Test
-	// public void authenticate_InvalidCredentials_BadCredentialsExceptionThrown() {
-	// // モックの設定
-	// UserDetailsService userDetailsService = mock(UserDetailsService.class);
-	// PasswordEncoder passwordEncoder = mock(PasswordEncoder.class);
-	// CustomAuthenticationProvider authProvider = new
-	// CustomAuthenticationProvider(userDetailsService,
-	// passwordEncoder);
+		// テストデータの設定
+		UserDetails userDetails = new User(username, passwordHash,
+				Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")));
 
-	// String username = "testUser";
-	// String password = "testPassword";
-	// UserDetails userDetails = User.withUsername(username)
-	// .password(passwordEncoder.encode(password))
-	// .roles("USER")
-	// .build();
+		// モックの動作設定
+		when(userDetailsService.loadUserByUsername(username)).thenReturn(userDetails);
+		when(passwordEncoder.matches(password, passwordHash)).thenReturn(false); // 認証失敗
 
-	// when(userDetailsService.loadUserByUsername(username)).thenReturn(userDetails);
-	// when(passwordEncoder.matches(password,
-	// userDetails.getPassword())).thenReturn(false);
+		// 認証オブジェクトの作成
+		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username,
+				password);
 
-	// UsernamePasswordAuthenticationToken authenticationToken = new
-	// UsernamePasswordAuthenticationToken(username,
-	// password);
+		// 認証を実行し、例外がスローされることを検証
+		assertThrows(BadCredentialsException.class, () -> authenticationProvider.authenticate(authentication));
+	}
 
-	// // テスト & 検証
-	// org.junit.jupiter.api.Assertions.assertThrows(BadCredentialsException.class,
-	// () -> {
-	// authProvider.authenticate(authenticationToken);
-	// });
-	// }
-
+	/**
+	 * サポートされている認証タイプのテストを行う
+	 */
 	@Test
 	public void supports_SupportedAuthenticationType_ReturnsTrue() {
 		// モックの設定
@@ -87,6 +101,9 @@ public class CustomAuthenticationProviderTests {
 		assert (authProvider.supports(UsernamePasswordAuthenticationToken.class));
 	}
 
+	/**
+	 * サポートされていない認証タイプのテストを行う
+	 */
 	@Test
 	public void supports_UnsupportedAuthenticationType_ReturnsFalse() {
 		// モックの設定

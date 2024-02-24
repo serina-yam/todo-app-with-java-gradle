@@ -1,6 +1,5 @@
 package com.example.todoappwithjavagradle.service;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,20 +40,15 @@ public class ItemService {
    *
    * @param itemRequest 登録するアイテム情報のリクエスト
    */
-  public void create(ItemRequest ItemRequest) {
+  public void create(ItemRequest itemRequest) {
 
     Item item = new Item();
     Integer userId = Integer.parseInt(httpSession.getAttribute(AttributeKey.USER_ID.getValue()).toString());
 
-    // 日付変換
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    String formattedDate = simpleDateFormat.format(ItemRequest.getTimeLimit());
-    java.sql.Date date = java.sql.Date.valueOf(formattedDate);
-
     item.setUserId(userId);
-    item.setTitle(ItemRequest.getTitle());
+    item.setTitle(itemRequest.getTitle());
     item.setState(0);
-    item.setTimeLimit(date);
+    item.setTimeLimit(itemRequest.getTimeLimit());
 
     itemRepository.save(item);
   }

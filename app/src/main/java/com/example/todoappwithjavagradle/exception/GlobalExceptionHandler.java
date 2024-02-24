@@ -1,4 +1,4 @@
-package com.example.todoappwithjavagradle.controller;
+package com.example.todoappwithjavagradle.exception;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

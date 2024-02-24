@@ -36,7 +36,7 @@ public class UserService {
     public Integer signupUserFromProvider(String oauth2UserId, String username, String loginType) {
         // GitHub or Google
         User user = new User(oauth2UserId, null, username, loginType);
-        
+
         User result = userRepository.save(user);
         Integer userId = result.getUserId();
         return userId;
@@ -51,9 +51,9 @@ public class UserService {
      */
     public Integer signupUserFromForm(String username, String password) {
         // パスワードをハッシュ化して保存
-        String encodedPassword = passwordEncoder.encode(password);
-        User user = new User(username, encodedPassword, null, LoginType.FORM.getValue());
-        
+        String passwordHash = passwordEncoder.encode(password);
+        User user = new User(username, passwordHash, null, LoginType.FORM.getValue());
+
         User result = userRepository.save(user);
         Integer userId = result.getUserId();
         return userId;
@@ -68,5 +68,5 @@ public class UserService {
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
-    
+
 }

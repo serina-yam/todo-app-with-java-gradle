@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -26,6 +27,7 @@ import jakarta.servlet.http.HttpSession;
 /**
  * アイテムサービスのテストクラス
  */
+@SuppressWarnings("null")
 @ExtendWith(MockitoExtension.class)
 public class ItemServiceTests {
 
@@ -58,11 +60,11 @@ public class ItemServiceTests {
         when(itemRepository.findByUserIdOrderByCreatedAtAsc(userId)).thenReturn(itemList);
 
         // テスト
-        List<Item> result = itemService.searchAll(userId);
+        List<Item> actual = itemService.searchAll(userId);
 
         // 検証
         verify(itemRepository, times(1)).findByUserIdOrderByCreatedAtAsc(userId);
-        assertSame(itemList, result);
+        assertSame(itemList, actual);
     }
 
     /**
@@ -75,11 +77,9 @@ public class ItemServiceTests {
      * @param timeLimit 期限
      * @throws ParseException パース例外
      */
-    @SuppressWarnings("null")
     @ParameterizedTest
     @CsvFileSource(resources = "/item_test_data.csv", numLinesToSkip = 1)
-    public void testCreate(Integer id, Integer userId, String title, Integer state, Date timeLimit)
-            throws ParseException {
+    public void testCreate(Integer id, Integer userId, String title, Integer state, Date timeLimit) {
         // モックの設定
         ItemRequest itemRequest = new ItemRequest();
         itemRequest.setTitle(title);
@@ -115,7 +115,6 @@ public class ItemServiceTests {
      *
      * @param id アイテムID
      */
-    @SuppressWarnings("null")
     @ParameterizedTest
     @CsvFileSource(resources = "/item_test_data.csv", numLinesToSkip = 1)
     public void testDelete(Integer id) {
@@ -124,5 +123,18 @@ public class ItemServiceTests {
 
         // 検証
         verify(itemRepository, times(1)).deleteById(id);
+    }
+
+    /**
+     * アイテムの削除をテスト<br>
+     * idがnull
+     */
+    @Test
+    public void testDelete_NullId() {
+        // テスト
+        itemService.delete(null);
+
+        // 検証
+        verify(itemRepository, never()).deleteById(any());
     }
 }

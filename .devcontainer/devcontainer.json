@@ -16,7 +16,8 @@
                 "oderwat.indent-rainbow",
                 "esbenp.prettier-vscode",
                 "formulahendry.auto-rename-tag",
-                "vincaslt.highlight-matching-tag"
+                "vincaslt.highlight-matching-tag",
+                "ryanluker.vscode-coverage-gutters"
             ]
         }
     },

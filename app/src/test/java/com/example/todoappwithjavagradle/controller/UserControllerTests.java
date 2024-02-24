@@ -24,6 +24,7 @@ import com.example.todoappwithjavagradle.util.LoginType;
 /**
  * ユーザーコントローラーのテストクラス
  */
+@SuppressWarnings("null")
 @ExtendWith(MockitoExtension.class)
 public class UserControllerTests {
 
@@ -58,8 +59,8 @@ public class UserControllerTests {
      */
     @ParameterizedTest
     @CsvFileSource(resources = "/user_test_data.csv", numLinesToSkip = 1)
-    public void testSignupUser_WhenUserDoesNotExist_ThenRedirectToLogin(Integer userId, String username,
-            String passwordHash) {
+    public void testSignupUser_WhenUserDoesNotExist_ThenRedirectToLogin(Integer userId, String loginType,
+            String username, String passwordHash) {
 
         // テスト
         String viewName = userController.signupUser(username, passwordHash, model);
@@ -77,11 +78,10 @@ public class UserControllerTests {
      * @param username     ユーザー名
      * @param passwordHash パスワードハッシュ
      */
-    @SuppressWarnings("null")
     @ParameterizedTest
     @CsvFileSource(resources = "/user_test_data.csv", numLinesToSkip = 1)
-    public void testSignupUser_WhenUserExists_ThenRedirectToSignupWithErrorMessage(Integer userId, String username,
-            String passwordHash) {
+    public void testSignupUser_WhenUserExists_ThenRedirectToSignupWithErrorMessage(Integer userId, String loginType,
+            String username, String passwordHash) {
 
         Model model = mock(Model.class);
         User user = new User(username, passwordHash, null, LoginType.FORM.getValue());
@@ -98,7 +98,6 @@ public class UserControllerTests {
      * ユーザーを登録するメソッドのテスト<br>
      * 例外発生
      */
-    @SuppressWarnings("null")
     @Test
     public void testSignupUser_WhenExceptionThrown_ThenHandleError() {
         // モックの設定

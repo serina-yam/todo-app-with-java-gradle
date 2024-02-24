@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.todoappwithjavagradle.entity.User;
+import com.example.todoappwithjavagradle.exception.ErrorHandling;
 import com.example.todoappwithjavagradle.service.UserService;
 import com.example.todoappwithjavagradle.util.AttributeKey;
-import com.example.todoappwithjavagradle.util.ErrorHandlingUtil;
 
 /**
  * ユーザー関連のコントローラークラス
@@ -41,6 +41,7 @@ public class UserController {
      * @param model    モデル
      * @return ログイン画面にリダイレクトする
      */
+    @SuppressWarnings("null")
     @PostMapping
     public String signupUser(@RequestParam("username") String username, @RequestParam("password") String password,
             Model model) {
@@ -71,6 +72,6 @@ public class UserController {
      * @return エラーページのテンプレート名
      */
     private String handleError(Exception ex, Model model) {
-        return ErrorHandlingUtil.handleError(ex, model);
+        return ErrorHandling.handleError(ex, model);
     }
 }
