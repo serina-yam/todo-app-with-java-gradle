@@ -1,11 +1,13 @@
-package com.example.todoappwithjavagradle.util;
+package com.example.todoappwithjavagradle.exception;
 
 import org.springframework.ui.Model;
+
+import com.example.todoappwithjavagradle.util.AttributeKey;
 
 /**
  * エラー処理を行うユーティリティクラス
  */
-public class ErrorHandlingUtil {
+public class ErrorHandling {
 
     /**
      * 例外を処理し、エラーメッセージをモデルに追加してエラーページの表示を行う
@@ -16,7 +18,9 @@ public class ErrorHandlingUtil {
      */
     @SuppressWarnings("null")
     public static String handleError(Exception ex, Model model) {
-        model.addAttribute(AttributeKey.ERROR_MESSAGE.getValue(), "An error occurred: " + ex.getMessage());
+        String message = ex.getMessage() == null ? ex.toString() : ex.getMessage();
+        model.addAttribute(AttributeKey.ERROR_MESSAGE.getValue(),
+                "An error occurred: " + message);
         return "error";
     }
 }
