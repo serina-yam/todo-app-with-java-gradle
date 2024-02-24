@@ -92,4 +92,5 @@ make open-test-result
 
 
 ## ER図
-![er](https://github.com/serina-yam/todo-app-with-java-gradle/assets/64587946/4ff7b7c5-57b7-4ec7-a3b0-ad79d8c0d80e)
+
+![er](https://github.com/serina-yam/todo-app-with-java-gradle/assets/64587946/2c9b7bf9-4608-40f4-8643-d9e952e3b6fd)
