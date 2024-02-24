@@ -22,10 +22,10 @@ public class PasswordEncoderConfigTests {
         context.register(PasswordEncoderConfig.class);
         context.refresh(); // コンテキストのリフレッシュ
 
-        // コンテキストからPasswordEncoderのBeanを取得
+        // テスト
         PasswordEncoder passwordEncoder = context.getBean(PasswordEncoder.class);
 
-        // PasswordEncoderのBeanが正しく定義されていることを確認
+        // 検証
         assertNotNull(passwordEncoder);
 
         // コンテキストをクローズ
