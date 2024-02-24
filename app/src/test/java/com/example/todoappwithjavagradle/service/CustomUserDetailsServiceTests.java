@@ -7,7 +7,6 @@ import static org.mockito.Mockito.when;
 
 import java.util.Collections;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -33,11 +32,16 @@ public class CustomUserDetailsServiceTests {
     private CustomUserDetailsService customUserDetailsService;
 
     /**
-     * サインアップフォームを表示するメソッドのテスト
+     * ユーザーをサインアップするメソッドのテスト
+     *
+     * @param userId       ユーザーID
+     * @param loginType    ログインタイプ
+     * @param username     ユーザー名
+     * @param passwordHash パスワードハッシュ
      */
     @ParameterizedTest
     @CsvFileSource(resources = "/user_test_data.csv", numLinesToSkip = 1)
-    public void testLoadUserByUsername(Integer userId, String username, String passwordHash) {
+    public void testLoadUserByUsername(Integer userId, String loginType, String username, String passwordHash) {
         // モックの設定
         com.example.todoappwithjavagradle.entity.User user = new com.example.todoappwithjavagradle.entity.User(username,
                 passwordHash, null, LoginType.FORM.toString());
@@ -55,16 +59,15 @@ public class CustomUserDetailsServiceTests {
     }
 
     /**
-     * ユーザーをサインアップするメソッドのテスト
+     * ユーザーが見つからない場合のテスト
      *
-     * @param userId       ユーザーID
-     * @param username     ユーザー名
-     * @param passwordHash パスワードハッシュ
+     * @param userId   ユーザーID
+     * @param username ユーザー名
      */
-    @Test
-    public void testLoadUserByUsername_UserNotFound() {
+    @ParameterizedTest
+    @CsvFileSource(resources = "/user_test_data.csv", numLinesToSkip = 1)
+    public void testLoadUserByUsername_UserNotFound(Integer userId, String loginType, String username) {
         // モックの設定
-        String username = "nonExistentUser";
         when(userService.getUserByUsername(username)).thenReturn(null);
 
         // テストと検証
