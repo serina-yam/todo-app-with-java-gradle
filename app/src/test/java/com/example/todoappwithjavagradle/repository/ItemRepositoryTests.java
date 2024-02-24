@@ -6,7 +6,6 @@ import static org.mockito.Mockito.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.mockito.Mock;
@@ -26,10 +25,10 @@ public class ItemRepositoryTests {
 	/**
 	 * 指定されたユーザーIDに関連するアイテム情報を作成日時の昇順で取得する
 	 */
-	@Test
-	public void testFindByUserIdOrderByCreatedAtAsc() {
+	@ParameterizedTest
+	@CsvFileSource(resources = "/item_test_data.csv", numLinesToSkip = 1)
+	public void testFindByUserIdOrderByCreatedAtAsc(Integer userId) {
 		// テストデータ
-		Integer userId = 1;
 		List<Item> itemList = new ArrayList<>();
 		itemList.add(new Item());
 		itemList.add(new Item());
@@ -38,11 +37,11 @@ public class ItemRepositoryTests {
 		when(itemRepository.findByUserIdOrderByCreatedAtAsc(userId)).thenReturn(itemList);
 
 		// テスト
-		List<Item> result = itemRepository.findByUserIdOrderByCreatedAtAsc(userId);
+		List<Item> actual = itemRepository.findByUserIdOrderByCreatedAtAsc(userId);
 
 		// 検証
 		verify(itemRepository, times(1)).findByUserIdOrderByCreatedAtAsc(userId);
-		assertEquals(itemList, result);
+		assertEquals(itemList, actual);
 	}
 
 	/**

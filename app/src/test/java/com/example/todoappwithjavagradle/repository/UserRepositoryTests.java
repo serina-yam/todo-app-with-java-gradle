@@ -25,12 +25,12 @@ public class UserRepositoryTests {
     /**
      * ユーザー名による検索をテスト
      *
-     * @param username ユーザー名
+     * @param username     ユーザー名
      * @param passwordHash パスワードハッシュ
      */
     @ParameterizedTest
     @CsvFileSource(resources = "/user_test_data.csv", numLinesToSkip = 1)
-    public void testFindByUsername(String username, String passwordHash) {
+    public void testFindByUsername(Integer userId, String loginType, String username, String passwordHash) {
         // モックの設定
         User user = new User(username, passwordHash, null, LoginType.FORM.toString());
         when(userRepository.findByUsername(username)).thenReturn(user);
