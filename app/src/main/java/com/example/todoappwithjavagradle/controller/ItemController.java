@@ -46,7 +46,7 @@ public class ItemController {
             Object userIdObj = httpSession.getAttribute(AttributeKey.USER_ID.getValue());
             if (userIdObj == null) {
                 // userIdがセッションにない場合はログイン画面にリダイレクトする
-                return "redirect:/login";
+                return "redirect:login";
             }
             Integer userId = Integer.parseInt(userIdObj.toString());
 
@@ -70,7 +70,7 @@ public class ItemController {
     @GetMapping(value = "/item/add")
     public String displayAdd(Model model) {
         model.addAttribute(AttributeKey.ITEM_REQUEST.getValue(), new ItemRequest());
-        return "/item/add";
+        return "item/add";
     }
 
     /**
@@ -89,7 +89,7 @@ public class ItemController {
                 model.addAttribute(error.getField() + "Error", error.getDefaultMessage());
             }
 
-            return "/item/add";
+            return "item/add";
         }
 
         try {

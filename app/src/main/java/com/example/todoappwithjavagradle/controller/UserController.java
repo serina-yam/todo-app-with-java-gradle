@@ -51,14 +51,14 @@ public class UserController {
             if (existUser != null) {
                 String errorMessage = "このユーザー名は使用されています";
                 model.addAttribute(AttributeKey.ERROR_MESSAGE.getValue(), errorMessage);
-                return "/signup";
+                return "signup";
             }
 
             userService.signupUserFromForm(username, password);
 
             String successMessage = "登録が完了しました！ログインできます。";
             model.addAttribute(AttributeKey.SUCCESS_MESSAGE.getValue(), successMessage);
-            return "/login"; // 登録後はログイン画面に遷移
+            return "login"; // 登録後はログイン画面に遷移
         } catch (Exception ex) {
             return handleError(ex, model);
         }
