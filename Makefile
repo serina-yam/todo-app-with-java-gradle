@@ -1,25 +1,14 @@
-JAVA_HOME := /home/vscode/.sdkman/candidates/java/current
-DOCKER_COMPOSE_BASH := cd .devcontainer/ && docker-compose exec todo-app-with-java-gradle bash -c
-APP_DIR := home/vscode/workspace/app
-
 # ヘルプメッセージを表示
 help:
-	@echo "Available commands:"
-	@echo "  test              : テストを実行"
-	@echo "  clean             : クリーンアップ"
+	@echo "使用可能なコマンド一覧:"
 	@echo "  setup             : Docker環境構築"
 	@echo "  build             : gradleプロジェクトをビルド"
 	@echo "  check-jar         : 作成されたjarファイルを確認"
+	@echo "  clean             : クリーンアップ"
 	@echo "  run               : アプリケーションを実行"
-	@echo "  open-test-result  : テスト結果のhtmlを開く"
-
-# テストを実行
-test:
-	cd app/ && ./gradlew test
-
-# クリーンアップ
-clean:
-	cd app/ && ./gradlew clean
+	@echo "  test              : テストを実行"
+	@echo "  open-test         : テスト結果のhtmlを開く"
+	@echo "  open-coverage     : カバレッジのhtmlを開く"
 
 # Docker Composeを使用して、プロジェクトの実行環境をセットアップ
 setup:
@@ -27,16 +16,28 @@ setup:
 
 # アプリケーションのビルド
 build:
-	$(DOCKER_COMPOSE_BASH) "export JAVA_HOME=$(JAVA_HOME) && cd $(APP_DIR) && sh ./gradlew build"
+	cd app/ && ./gradlew build
 
 # ビルド後のjarファイルの確認
 check-jar:
-	${DOCKER_COMPOSE_BASH} "cd $(APP_DIR) && ls build/libs/"
+	ls app/build/libs/
+
+# クリーンアップ
+clean:
+	cd app/ && ./gradlew clean
 
 # アプリケーションの実行
 run:
-	${DOCKER_COMPOSE_BASH} "export JAVA_HOME=$(JAVA_HOME) && export PATH=\$${PATH}:$(JAVA_HOME)/bin && cd $(APP_DIR) && java -jar build/libs/todo-app-with-java-gradle-0.0.1-SNAPSHOT.jar"
+	java -jar app/build/libs/todo-app-with-java-gradle-0.0.1-SNAPSHOT.jar
+
+# テストを実行
+test:
+	cd app/ && ./gradlew test
 
 # テスト結果のhtmlを開く
-open-test-result:
+open-test:
 	open ./app/build/reports/tests/test/index.html
+
+# カバレッジをhtmlを開く
+open-coverage:
+	open ./app/build/build/reports/jacoco/test/html/index.html
