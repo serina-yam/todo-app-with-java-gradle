@@ -66,7 +66,7 @@ public class UserControllerTests {
         String viewName = userController.signupUser(username, passwordHash, model);
 
         // 検証
-        assert (viewName.equals("/login"));
+        assert (viewName.equals("login"));
         verify(userService, times(1)).signupUserFromForm(anyString(), anyString());
     }
 
@@ -90,7 +90,7 @@ public class UserControllerTests {
         String actual = userController.signupUser(username, passwordHash, model);
 
         // 検証
-        assertEquals(actual, "/signup");
+        assertEquals(actual, "signup");
         verify(model).addAttribute(eq("errorMessage"), anyString());
     }
 

@@ -84,7 +84,7 @@ public class ItemControllerTests {
         verify(httpSession, times(1)).getAttribute(AttributeKey.USER_ID.getValue());
         verify(itemService, never()).searchAll(any());
         verify(model, never()).addAttribute(any(), any());
-        assertEquals("redirect:/login", actual);
+        assertEquals("redirect:login", actual);
     }
 
     /**
@@ -119,7 +119,7 @@ public class ItemControllerTests {
         // 検証
         verify(model, times(1)).addAttribute(AttributeKey.ITEM_REQUEST.getValue(), new ItemRequest());
 
-        assertEquals("/item/add", actual);
+        assertEquals("item/add", actual);
     }
 
     /**
@@ -155,7 +155,7 @@ public class ItemControllerTests {
         // 検証
         verify(model, times(2)).addAttribute(any(String.class), any(String.class));
         // 2回のaddAttributeが呼ばれたことを検証し、各フィールドのエラーメッセージがモデルに追加されたことを確認
-        assertEquals("/item/add", actual);
+        assertEquals("item/add", actual);
     }
 
     /**
