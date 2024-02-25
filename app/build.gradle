@@ -33,7 +33,7 @@ dependencies {
 	implementation 'org.webjars:popper.js:1.12.9-1'
 	implementation 'org.webjars:jquery:3.5.0'
 	implementation 'org.apache.logging.log4j:log4j-api:2.22.1'
-    implementation 'org.apache.logging.log4j:log4j-core:2.22.1'
+	implementation 'org.apache.logging.log4j:log4j-core:2.22.1'
 	implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
 	compileOnly 'org.projectlombok:lombok'
 	compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
