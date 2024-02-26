@@ -9,6 +9,8 @@ help:
 	@echo "  test              : テストを実行"
 	@echo "  open-test         : テスト結果のhtmlを開く"
 	@echo "  open-coverage     : カバレッジのhtmlを開く"
+	@echo "  show-test         : テスト結果htmlのパスを表示"
+	@echo "  show-coverage     : カバレッジhtmlをのパスを表示"
 
 # Docker Composeを使用して、プロジェクトの実行環境をセットアップ
 setup:
@@ -16,7 +18,7 @@ setup:
 
 # アプリケーションのビルド
 build:
-	cd app/ && ./gradlew build
+	cd app/ && gradle wrapper && ./gradlew build
 
 # ビルド後のjarファイルの確認
 check-jar:
@@ -41,3 +43,11 @@ open-test:
 # カバレッジをhtmlを開く
 open-coverage:
 	open ./app/build/build/reports/jacoco/test/html/index.html
+
+# テスト結果htmlのパスを表示
+show-test:
+	@echo "./app/build/reports/tests/test/index.html"
+
+# カバレッジhtmlのパスを表示
+show-coverage:
+	@echo "./app/build/reports/jacoco/test/html/index.html"
