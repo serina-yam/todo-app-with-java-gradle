@@ -1,6 +1,6 @@
 DOCKER_COMPOSE_BASH := cd .devcontainer/ && docker-compose exec todo-app-with-java-gradle bash -c
 APP_DIR := home/vscode/workspace/app
-
+current_dir := $(shell cd)
 
 # ヘルプメッセージを表示
 help:
@@ -50,21 +50,24 @@ run:
 test:
 	${DOCKER_COMPOSE_BASH} "cd $(APP_DIR) && ./gradlew test"
 
-# Windows用のコマンド
-ifeq ($(OS),Windows_NT)
-    open_CMD = start
-else
-    # その他のプラットフォーム用のコマンド
-    open_CMD = open
-endif
 
 # テスト結果のhtmlを開く
+ifeq ($(OS),Windows_NT)
+    OPEN_TEST_CMD = call open_test.bat "$(current_dir)"
+else
+    OPEN_TEST_CMD = open ./app/build/reports/tests/test/index.html
+endif
+
 open-test:
-	$(open_CMD) ./app/build/reports/tests/test/index.html
+    $(OPEN_TEST_CMD)
 
 # カバレッジをhtmlを開く
+ifeq ($(OS),Windows_NT)
+    OPEN_COVERAGE_CMD = call open_coverage.bat "$(current_dir)"
+else
+    OPEN_COVERAGE_CMD = open ./app/build/reports/jacoco/test/html/index.html
 open-coverage:
-	$(open_CMD) ./app/build/reports/jacoco/test/html/index.html
+	$(OPEN_COVERAGE_CMD)
 
 # テスト結果htmlのパスを表示
 show-test:
