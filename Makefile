@@ -2,6 +2,14 @@ DOCKER_COMPOSE_BASH := cd .devcontainer/ && docker-compose exec todo-app-with-ja
 APP_DIR := home/vscode/workspace/app
 current_dir := $(shell cd)
 
+ifeq ($(OS),Windows_NT)
+    OPEN_TEST_CMD = call open_test.bat "$(current_dir)"
+    OPEN_COVERAGE_CMD = call open_coverage.bat "$(current_dir)"
+else
+    OPEN_TEST_CMD = open ./app/build/reports/tests/test/index.html
+    OPEN_COVERAGE_CMD = open ./app/build/reports/jacoco/test/html/index.html
+endif
+
 # ヘルプメッセージを表示
 help:
 	@echo "-----------------------------------------------------"
@@ -50,22 +58,11 @@ run:
 test:
 	${DOCKER_COMPOSE_BASH} "cd $(APP_DIR) && ./gradlew test"
 
-
 # テスト結果のhtmlを開く
-ifeq ($(OS),Windows_NT)
-    OPEN_TEST_CMD = call open_test.bat "$(current_dir)"
-else
-    OPEN_TEST_CMD = open ./app/build/reports/tests/test/index.html
-endif
-
 open-test:
     $(OPEN_TEST_CMD)
 
 # カバレッジをhtmlを開く
-ifeq ($(OS),Windows_NT)
-    OPEN_COVERAGE_CMD = call open_coverage.bat "$(current_dir)"
-else
-    OPEN_COVERAGE_CMD = open ./app/build/reports/jacoco/test/html/index.html
 open-coverage:
 	$(OPEN_COVERAGE_CMD)
 
