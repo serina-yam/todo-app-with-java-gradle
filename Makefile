@@ -1,3 +1,7 @@
+DOCKER_COMPOSE_BASH := cd .devcontainer/ && docker-compose exec todo-app-with-java-gradle bash -c
+APP_DIR := home/vscode/workspace/app
+
+
 # ヘルプメッセージを表示
 help:
 	@echo "使用可能なコマンド一覧:"
@@ -17,24 +21,28 @@ setup:
 	cd .devcontainer/ && docker-compose up -d
 
 # アプリケーションのビルド
+# cd app/ && gradle wrapper && ./gradlew build
 build:
-	cd app/ && gradle wrapper && ./gradlew build
+	$(DOCKER_COMPOSE_BASH) "cd $(APP_DIR) && sh ./gradlew build"
 
 # ビルド後のjarファイルの確認
 check-jar:
 	ls app/build/libs/
 
 # クリーンアップ
+# cd app/ && ./gradlew clean
 clean:
-	cd app/ && ./gradlew clean
+	${DOCKER_COMPOSE_BASH} "cd $(APP_DIR) && ./gradlew clean"
 
 # アプリケーションの実行
+# java -jar app/build/libs/todo-app-with-java-gradle-0.0.1-SNAPSHOT.jar
 run:
-	java -jar app/build/libs/todo-app-with-java-gradle-0.0.1-SNAPSHOT.jar
+	${DOCKER_COMPOSE_BASH} "cd $(APP_DIR) && java -jar build/libs/todo-app-with-java-gradle-0.0.1-SNAPSHOT.jar"
 
 # テストを実行
+# cd app/ && ./gradlew test
 test:
-	cd app/ && ./gradlew test
+	${DOCKER_COMPOSE_BASH} "cd $(APP_DIR) && ./gradlew test"
 
 # テスト結果のhtmlを開く
 open-test:

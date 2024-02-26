@@ -30,13 +30,7 @@ git clone https://github.com/serina-yam/todo-app-with-java-gradle.git
 cd todo-app-with-java-gradle
 ```
 
-#### 2. Docker Compose を使用して、プロジェクトの実行環境をセットアップ
-
-```zsh
-make setup
-```
-
-#### 3. application.properties の置き換え
+#### 2. application.properties の置き換え
 
 以下にあるファイルを、AWS S3 で配布したファイルに置き換えてください。<br />
 パス： app/src/main/resources/application.properties<br />
@@ -45,6 +39,12 @@ make setup
 
 ```zsh
 mv -f /Users/XXXXXX/Desktop/application.properties app/src/main/resources/application.properties
+```
+
+#### 3. Docker Compose を使用して、プロジェクトの実行環境をセットアップ
+
+```zsh
+make setup
 ```
 
 #### 4. アプリケーションのビルド

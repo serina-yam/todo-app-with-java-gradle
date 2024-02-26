@@ -33,3 +33,8 @@ RUN curl -s "https://get.sdkman.io" | bash \
     && source ${SDKMAN_DIR}/bin/sdkman-init.sh \
     && sdk install java ${JAVA_VERSION} \
     && sdk install gradle ${GRADLE_VERSION}
+
+# 環境変数の設定
+ENV JAVA_HOME=/home/vscode/.sdkman/candidates/java/current
+ENV GRADLE_HOME=/home/vscode/.sdkman/candidates/gradle/current
+ENV PATH=${JAVA_HOME}/bin:${GRADLE_HOME}/bin:${PATH}
