@@ -60,7 +60,7 @@ test:
 
 # テスト結果のhtmlを開く
 open-test:
-    $(OPEN_TEST_CMD)
+	$(OPEN_TEST_CMD)
 
 # カバレッジをhtmlを開く
 open-coverage:
