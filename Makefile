@@ -23,7 +23,7 @@ setup:
 # アプリケーションのビルド
 # cd app/ && gradle wrapper && ./gradlew build
 build:
-	$(DOCKER_COMPOSE_BASH) "cd $(APP_DIR) && sh ./gradlew build"
+	$(DOCKER_COMPOSE_BASH) "cd $(APP_DIR) && gradle wrapper && ./gradlew build"
 
 # ビルド後のjarファイルの確認
 check-jar:
