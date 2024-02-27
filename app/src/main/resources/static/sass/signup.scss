@@ -1,0 +1,76 @@
+// --------------------------------
+// ログイン画面
+// --------------------------------
+
+@import "./ _common.scss";
+
+.signup {
+    // background-image: url(../../images/background.jpg);
+    background-color: $lightBrown;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+
+    // コンテナ
+    .signup__container {
+        max-width: 1072px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        height: 100%;
+
+        // ボックス
+        .signup__box {
+            background-color: $white;
+            border-radius: 10px;
+            box-shadow: 2px 2px 2px $subColor;
+            padding: 2.4rem;
+            min-width: 30rem;
+
+            .signup__inner {
+                width: 80%;
+                margin: 0 auto;
+
+                .signup__innerbox {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                .signup__title {
+                    margin-bottom: 2.4rem;
+                }
+
+                input {
+                    position: relative;
+                    line-height: 2rem;
+                    width: 100%;
+                    margin-bottom: 0.6rem;
+                    max-width: 24rem;
+                }
+
+                .text-danger {
+                    margin-top: 0rem;
+                }
+
+                .link-back {
+                    display: block;
+                    text-align: end;
+                }
+
+                // ボタン設定
+                .btn {
+                    width: 100%;
+                    margin-bottom: 0.6rem;
+                    max-width: 24rem;
+                }
+
+                .btn-signup {
+                    background-color: $accentColor;
+                    color: $white;
+                }
+            }
+        }
+    }
+}

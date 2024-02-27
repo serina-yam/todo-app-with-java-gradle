@@ -1,0 +1,117 @@
+.inner {
+  width: 100%;
+  max-width: 1072px;
+  padding: 2.4rem;
+  margin: 0 auto;
+  overflow: hidden;
+}
+@media screen and (max-width: 480px) {
+  .inner {
+    padding: 2.4rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 1.6rem;
+}
+.buttons .btn-add {
+  background-color: #80c4d8;
+  color: #ffffff;
+  margin-right: 0.8rem;
+}
+.buttons .btn-back {
+  background-color: #928178;
+  color: #ffffff;
+  margin-right: 0.8rem;
+}
+
+.text-danger {
+  color: #db4455;
+}
+
+.changed {
+  background-color: #FFFF99;
+}
+
+.login {
+  background-color: #b7aea4;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+.login .login__container {
+  max-width: 1072px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  height: 100%;
+}
+.login .login__container .login__box {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px #928178;
+  padding: 2.4rem;
+  min-width: 30rem;
+}
+.login .login__container .login__box .login__inner {
+  width: 70%;
+  margin: 0 auto;
+}
+.login .login__container .login__box .login__inner .login__innerbox {
+  display: flex;
+  flex-direction: column;
+}
+.login .login__container .login__box .login__inner .login__title {
+  margin-bottom: 2.4rem;
+}
+.login .login__container .login__box .login__inner input {
+  position: relative;
+  line-height: 2rem;
+  width: 100%;
+  margin-bottom: 0.6rem;
+  max-width: 24rem;
+}
+.login .login__container .login__box .login__inner .text-danger {
+  margin-top: 0rem;
+}
+.login .login__container .login__box .login__inner .link-signup {
+  display: block;
+  text-align: end;
+}
+.login .login__container .login__box .login__inner .btn {
+  width: 100%;
+  margin-bottom: 0.6rem;
+  max-width: 24rem;
+}
+.login .login__container .login__box .login__inner .btn-login {
+  background-color: #80c4d8;
+  color: #ffffff;
+}
+.login .login__container .login__box .login__inner .btn-github {
+  background-color: #3d3b40;
+  color: #ffffff;
+}
+.login .login__container .login__box .login__inner .btn-google {
+  background-color: #4285f4;
+  color: #ffffff;
+}
+.login .login__container .login__box .login__inner .separator {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login .login__container .login__box .login__inner .separator::before, .login .login__container .login__box .login__inner .separator::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: #b3b3b3;
+}
+.login .login__container .login__box .login__inner .separator .or {
+  background-color: #ffffff;
+  padding: 0 10px;
+}

@@ -1,0 +1,72 @@
+name: Build and Test on Push
+
+# Event設定
+on:
+  pull_request:
+    branches:
+      - main
+      - dev
+
+jobs:
+  build:
+    # Runnerを指定
+    runs-on: ubuntu-latest
+
+    services:
+      # PostgreSQLのサービスを定義
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }} # PostgreSQLのデータベース名
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }} # PostgreSQLのユーザー名
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }} # PostgreSQLのパスワード
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    env:
+      # db情報
+      SPRING_DATASOURCE_URL: jdbc:postgresql://127.0.0.1:5432/${{ secrets.POSTGRES_DB }}
+      SPRING_DATASOURCE_USERNAME: ${{ secrets.POSTGRES_USER }}
+      SPRING_DATASOURCE_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
+      # OAuth
+      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT_ID: ${{ secrets.OAUTH_GOOGLE_CLIENT_ID }}
+      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GOOGLE_CLIENT_SECRET: ${{ secrets.OAUTH_GOOGLE_CLIENT_SECRET }}
+      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GITHUB_CLIENT_ID: ${{ secrets.OAUTH_GITHUB_CLIENT_ID }}
+      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_GITHUB_CLIENT_SECRET: ${{ secrets.OAUTH_GITHUB_CLIENT_SECRET }}
+
+    steps:
+      # RunnnerにGitリポジトリのコピーをダウンロード
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # dockerizeをインストール
+      - name: Install dockerize
+        run: |
+          wget https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz
+          tar -xzvf dockerize-linux-amd64-v0.6.1.tar.gz
+          sudo mv dockerize /usr/local/bin/dockerize
+          rm dockerize-linux-amd64-v0.6.1.tar.gz
+
+      # Java 17をセットアップ
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: "adopt"
+          java-version: "17"
+
+      # PostgreSQLの起動を待機
+      - name: Wait for PostgreSQL to start
+        run: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      # PostgreSQLにpgcrypto拡張機能を作成
+      - name: Create extension pgcrypto
+        run: docker exec -i ${{ job.services.postgres.id }} psql -U ${{ secrets.POSTGRES_USER }} -d ${{ secrets.POSTGRES_DB }} -c "CREATE EXTENSION IF NOT EXISTS pgcrypto;"
+
+      # Build and Test
+      - name: Build and Test with Gradle
+        run: |
+          cd app
+          ./gradlew build

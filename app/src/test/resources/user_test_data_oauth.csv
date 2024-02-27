@@ -1,0 +1,2 @@
+user_id,user_name,password,password_hash
+testUser,testUsername,test123,$2a$10$s1Q4RBVb7QcrqdsCqYVL2e4i8l9442zQW3HaHDHI3HC2V2qGZg8lW

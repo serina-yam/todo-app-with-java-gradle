@@ -1,0 +1,2 @@
+userId, login_type, username, password_hash, oauth2_user_id, password
+1, Form, testUsername, password_hash1, testOauth2Id, pass

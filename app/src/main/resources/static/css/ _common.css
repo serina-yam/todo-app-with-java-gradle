@@ -1,0 +1,36 @@
+.inner {
+  width: 100%;
+  max-width: 1072px;
+  padding: 2.4rem;
+  margin: 0 auto;
+  overflow: hidden;
+}
+@media screen and (max-width: 480px) {
+  .inner {
+    padding: 2.4rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 1.6rem;
+}
+.buttons .btn-add {
+  background-color: #80c4d8;
+  color: #ffffff;
+  margin-right: 0.8rem;
+}
+.buttons .btn-back {
+  background-color: #928178;
+  color: #ffffff;
+  margin-right: 0.8rem;
+}
+
+.text-danger {
+  color: #db4455;
+}
+
+.changed {
+  background-color: #FFFF99;
+}

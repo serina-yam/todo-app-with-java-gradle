@@ -1,0 +1,59 @@
+// ---------------- カラー ----------------
+$mainColor: #80c4d8;
+$subColor: #928178;
+$accentColor: #970747;
+
+$black: #3d3b40;
+$gray: #b3b3b3;
+$white: #ffffff;
+$lightBrown: #b7aea4;
+$red: #db4455;
+$blue: #4285f4;
+$lightBlue: #ADD8E6;
+
+// ---------------- フォント ----------------
+@mixin noto {
+    font-family: "Noto Sans JP", sans-serif;
+}
+
+// ---------------- インナー ----------------
+.inner {
+    width: 100%;
+    max-width: 1072px;
+    padding: 2.4rem;
+    margin: 0 auto;
+    overflow: hidden;
+
+    @media screen and (max-width: 480px) {
+        padding: 2.4rem;
+    }
+}
+
+// ---------------- ボタン ----------------
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 1.6rem;
+
+    .btn-add {
+        background-color: $mainColor;
+        color: $white;
+        margin-right: 0.8rem;
+    }
+
+    .btn-back {
+        background-color: $subColor;
+        color: $white;
+        margin-right: 0.8rem;
+    }
+}
+
+// ---------------- テキスト --------------
+.text-danger {
+    color: $red;
+}
+
+// ---------------- 状態 -----------------
+.changed {
+    background-color: #FFFF99;
+}
