@@ -58,6 +58,9 @@ run:
 test:
 	${DOCKER_COMPOSE_BASH} "cd $(APP_DIR) && ./gradlew test"
 
+javadoc:
+	${DOCKER_COMPOSE_BASH} "cd $(APP_DIR) && ./gradlew javadoc"
+
 # テスト結果のhtmlを開く
 open-test:
 	$(OPEN_TEST_CMD)
