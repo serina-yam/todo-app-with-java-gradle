@@ -5,9 +5,11 @@ current_dir := $(shell cd)
 ifeq ($(OS),Windows_NT)
     OPEN_TEST_CMD = call open_test.bat "$(current_dir)"
     OPEN_COVERAGE_CMD = call open_coverage.bat "$(current_dir)"
+		OPEN_JAVADOC_CMD = call open_javadoc.bat "$(current_dir)"
 else
     OPEN_TEST_CMD = open ./app/build/reports/tests/test/index.html
     OPEN_COVERAGE_CMD = open ./app/build/reports/jacoco/test/html/index.html
+		OPEN_JAVADOC_CMD = open ./app/build/docs/javadoc/index.html
 endif
 
 # ヘルプメッセージを表示
@@ -24,10 +26,12 @@ help:
 	@echo "- 結果を見る ---------------------------------------"
 	@echo "  open-test         : テスト結果のhtmlを開く"
 	@echo "  open-coverage     : カバレッジのhtmlを開く"
+	@echo "  open-javadoc      : javadocのhtmlを開く"
 	@echo "- パス確認 -----------------------------------------"
 	@echo "  show-test         : テスト結果htmlのパスを表示"
-	@echo "  show-coverage     : カバレッジhtmlをのパスを表示"
-	@echo "  check-jar         : 作成されたjarファイルを確認"
+	@echo "  show-coverage     : カバレッジhtmlのパスを表示"
+	@echo "  show-javadoc      : javadoc htmlのパスを表示"
+	@echo "  show-jar          : 作成されたjarファイルを確認"
 
 # Docker Composeを使用して、プロジェクトの実行環境をセットアップ
 setup:
@@ -42,7 +46,7 @@ rebuild:
 	$(DOCKER_COMPOSE_BASH) "cd $(APP_DIR) && ./gradlew build"
 
 # ビルド後のjarファイルの確認
-check-jar:
+show-jar:
 	ls app/build/libs/
 
 # クリーンアップ
@@ -69,6 +73,9 @@ open-test:
 open-coverage:
 	$(OPEN_COVERAGE_CMD)
 
+open-javadoc:
+	$(OPEN_COVERAGE_CMD)
+
 # テスト結果htmlのパスを表示
 show-test:
 	@echo "./app/build/reports/tests/test/index.html"
@@ -76,3 +83,6 @@ show-test:
 # カバレッジhtmlのパスを表示
 show-coverage:
 	@echo "./app/build/reports/jacoco/test/html/index.html"
+
+show-javadoc:
+	@echo "./app/build/docs/javadoc/index.html"
