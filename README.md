@@ -39,11 +39,11 @@ VSCode での実行方法は、Wiki の「[スタートガイド ‐ VSCode 使�
 
 #### 1. リポジトリをローカル環境にクローン
 
-```zsh
+```bash
 git clone https://github.com/serina-yam/todo-app-with-java-gradle.git
 ```
 
-```zsh
+```bash
 cd todo-app-with-java-gradle
 ```
 
@@ -54,25 +54,25 @@ cd todo-app-with-java-gradle
 
 コマンドを使用する場合の例です。
 
-```zsh
+```bash
 mv -f /Users/XXXXXX/Desktop/application.properties app/src/main/resources/application.properties
 ```
 
 #### 3. Docker Compose を使用して、プロジェクトの実行環境をセットアップ
 
-```zsh
+```bash
 make setup
 ```
 
 #### 4. アプリケーションのビルド
 
-```zsh
+```bash
 make build
 ```
 
 #### 5. アプリケーションの実行
 
-```zsh
+```bash
 make run
 ```
 
@@ -88,13 +88,13 @@ http://localhost:9000
 
 #### 1. ビルド
 
-```zsh
+```bash
 make build
 ```
 
 #### 2. クリーンアップ
 
-```zsh
+```bash
 make clean
 ```
 
@@ -102,18 +102,31 @@ make clean
 
 #### 1. テスト実行
 
-```zsh
+```bash
 make test
 ```
 
 #### 2. ビルド時に作成されたテスト結果を見る
 
-```zsh
+```bash
 make open-test
 ```
 
 #### 3. ビルド時に作成されたカバレッジ結果を見る
 
-```zsh
+```bash
 make open-coverage
+```
+
+### 📖ドキュメント
+
+#### 1. Javadoc生成
+
+```bash
+make javadoc
+```
+
+#### 2. 作成されたJavadocを見る
+```bash
+make open-javadoc
 ```
