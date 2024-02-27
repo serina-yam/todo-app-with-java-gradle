@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -32,7 +33,7 @@ public class UserRepositoryTests {
     @CsvFileSource(resources = "/user_test_data.csv", numLinesToSkip = 1)
     public void testFindByUsername(Integer userId, String loginType, String username, String passwordHash) {
         // モックの設定
-        User user = new User(username, passwordHash, null, LoginType.FORM.toString());
+        User user = new User(userId, username, passwordHash, null, LoginType.FORM.toString());
         when(userRepository.findByUsername(username)).thenReturn(user);
 
         // テスト
@@ -42,5 +43,21 @@ public class UserRepositoryTests {
         assertNotNull(foundUser);
         assertEquals(username, foundUser.getUsername());
         assertEquals(passwordHash, foundUser.getPasswordHash());
+    }
+
+    /**
+     * シーケンス取得のテスト
+     */
+    @Test
+    void testGetNextUserId() {
+        // モックの設定
+        Integer expectedId = 123; // 仮の次のID
+        when(userRepository.getNextUserId()).thenReturn(expectedId);
+
+        // テスト実行
+        Integer actualId = userRepository.getNextUserId();
+
+        // 結果の検証
+        assertEquals(expectedId, actualId);
     }
 }

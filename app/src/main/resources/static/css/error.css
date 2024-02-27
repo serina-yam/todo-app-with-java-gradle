@@ -29,7 +29,6 @@
 
 .text-danger {
   color: #db4455;
-  white-space: nowrap;
 }
 
 .changed {
@@ -59,4 +58,5 @@
 }
 .error .error__container .error__box .error__title {
   margin-bottom: 2.4rem;
+}argin-bottom: 2.4rem;
 }

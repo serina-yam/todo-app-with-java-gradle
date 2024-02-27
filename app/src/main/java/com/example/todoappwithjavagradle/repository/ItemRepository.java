@@ -23,7 +23,7 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
      * @param userId ユーザーID
      * @return ユーザーに関連するアイテム情報のリスト
      */
-    List<Item> findByUserIdOrderByCreatedAtAsc(Integer userId);
+    List<Item> findByUserIdOrderByIdAsc(Integer userId);
 
     /**
      * 指定されたIDのアイテムの状態を更新する
@@ -36,4 +36,11 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
     @Query("UPDATE Item i SET i.state = :state WHERE i.id = :itemId")
     void updateStateById(@Param("itemId") Integer id, @Param("state") Integer state);
 
+    /**
+     * シーケンス取得
+     * 
+     * @return ID
+     */
+    @Query(value = "SELECT nextval('item_id_seq')", nativeQuery = true)
+    Integer getNextId();
 }

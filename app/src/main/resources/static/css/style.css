@@ -29,7 +29,6 @@
 
 .text-danger {
   color: #db4455;
-  white-space: nowrap;
 }
 
 .changed {
@@ -96,5 +95,7 @@
 }
 #main .btn-del {
   background-color: #928178;
+  color: #ffffff;
+}78;
   color: #ffffff;
 }

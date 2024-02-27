@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.mockito.Mock;
@@ -34,18 +35,18 @@ public class ItemRepositoryTests {
 		itemList.add(new Item());
 
 		// モックの設定
-		when(itemRepository.findByUserIdOrderByCreatedAtAsc(userId)).thenReturn(itemList);
+		when(itemRepository.findByUserIdOrderByIdAsc(userId)).thenReturn(itemList);
 
 		// テスト
-		List<Item> actual = itemRepository.findByUserIdOrderByCreatedAtAsc(userId);
+		List<Item> actual = itemRepository.findByUserIdOrderByIdAsc(userId);
 
 		// 検証
-		verify(itemRepository, times(1)).findByUserIdOrderByCreatedAtAsc(userId);
+		verify(itemRepository, times(1)).findByUserIdOrderByIdAsc(userId);
 		assertEquals(itemList, actual);
 	}
 
 	/**
-	 * 指定されたIDのアイテムの状態を更新するテストメソッド
+	 * 指定されたIDのアイテムの状態を更新するテスト
 	 *
 	 * @param id    アイテムID
 	 * @param state 状態
@@ -58,5 +59,21 @@ public class ItemRepositoryTests {
 
 		// 検証
 		verify(itemRepository, times(1)).updateStateById(id, state);
+	}
+
+	/**
+	 * シーケンス取得のテスト
+	 */
+	@Test
+	void testGetNextId() {
+		// モックの設定
+		Integer expectedId = 123; // 仮の次のID
+		when(itemRepository.getNextId()).thenReturn(expectedId);
+
+		// テスト実行
+		Integer actualId = itemRepository.getNextId();
+
+		// 結果の検証
+		assertEquals(expectedId, actualId);
 	}
 }
