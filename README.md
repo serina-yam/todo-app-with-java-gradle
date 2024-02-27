@@ -7,6 +7,23 @@
 - Docker 25.0.2
 - Docker Compose v2.24.3-desktop.1
 
+## 動作確認環境
+
+以下の環境で動作確認済みになります。
+
+### mac
+
+- チップ: Apple M1
+- メモリ: 8GB
+- macOS: macOS Sonoma v14.3
+
+### windows
+
+- プロセッサ:	Intel Core i7
+- 実装 RAM:	16.0 GB
+- エディション:	Windows 10 Pro
+- バージョン:	22H2
+
 ※<br />
 Windows の場合は、make コマンドが使用できる状態[^1]で実施してください。<br />
 インストールせずに実施する場合は、[Makefile](https://github.com/serina-yam/todo-app-with-java-gradle/blob/main/Makefile) を参照して実施をお願いします。
