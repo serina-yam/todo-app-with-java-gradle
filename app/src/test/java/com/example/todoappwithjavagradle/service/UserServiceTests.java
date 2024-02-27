@@ -43,10 +43,11 @@ public class UserServiceTests {
         String oauth2UserId = "oauth2test";
         String username = "testUser";
         String loginType = LoginType.GITHUB.getValue();
-        User savedUser = new User(oauth2UserId, null, username, loginType);
+        User savedUser = new User(1, oauth2UserId, null, username, loginType);
         savedUser.setUserId(1); // 保存後のユーザーID
 
-        // userRepository.save()のスタブ化
+        // モックの設定
+        when(userRepository.getNextUserId()).thenReturn(1);
         when(userRepository.save(any(User.class))).thenReturn(savedUser);
 
         // テスト
@@ -65,13 +66,12 @@ public class UserServiceTests {
     void testSignupUserFromForm(Integer userId, String loginType, String username, String passwordHash,
             String oauth2UserId, String password) {
         // テストデータの設定
-        User savedUser = new User(username, passwordHash, null, LoginType.FORM.getValue());
-        savedUser.setUserId(1); // 保存後のユーザーID
+        User savedUser = new User(userId, username, passwordHash, null, LoginType.FORM.getValue());
+        savedUser.setUserId(userId); // 保存後のユーザーID
 
-        // passwordEncoder.encode()のスタブ化
+        // モックの設定
+        when(userRepository.getNextUserId()).thenReturn(userId);
         when(passwordEncoder.encode(anyString())).thenReturn(passwordHash);
-
-        // userRepository.save()のスタブ化
         when(userRepository.save(any(User.class))).thenReturn(savedUser);
 
         // テスト
@@ -94,7 +94,7 @@ public class UserServiceTests {
     @CsvFileSource(resources = "/user_test_data.csv", numLinesToSkip = 1)
     public void testGetUserByUsername(Integer userId, String loginType, String username, String passwordHash) {
         // モックの設定
-        User user = new User(username, passwordHash, null, LoginType.FORM.toString());
+        User user = new User(userId, username, passwordHash, null, LoginType.FORM.toString());
         when(userRepository.findByUsername(username)).thenReturn(user);
 
         // テスト

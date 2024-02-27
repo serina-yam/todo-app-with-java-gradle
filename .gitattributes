@@ -1,0 +1,2 @@
+# Windowsでも改行コードがLFになるように設定
+text=auto eol=lf

@@ -43,7 +43,8 @@ public class CustomUserDetailsServiceTests {
     @CsvFileSource(resources = "/user_test_data.csv", numLinesToSkip = 1)
     public void testLoadUserByUsername(Integer userId, String loginType, String username, String passwordHash) {
         // モックの設定
-        com.example.todoappwithjavagradle.entity.User user = new com.example.todoappwithjavagradle.entity.User(username,
+        com.example.todoappwithjavagradle.entity.User user = new com.example.todoappwithjavagradle.entity.User(userId,
+                username,
                 passwordHash, null, LoginType.FORM.toString());
         user.setUserId(userId);
         when(userService.getUserByUsername(username)).thenReturn(user);

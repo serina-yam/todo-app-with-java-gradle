@@ -33,6 +33,11 @@
                 width: 80%;
                 margin: 0 auto;
 
+                .signup__innerbox {
+                    display: flex;
+                    flex-direction: column;
+                }
+
                 .signup__title {
                     margin-bottom: 2.4rem;
                 }
@@ -42,6 +47,7 @@
                     line-height: 2rem;
                     width: 100%;
                     margin-bottom: 0.6rem;
+                    max-width: 24rem;
                 }
 
                 .text-danger {
@@ -57,7 +63,9 @@
                 .btn {
                     width: 100%;
                     margin-bottom: 0.6rem;
+                    max-width: 24rem;
                 }
+
                 .btn-signup {
                     background-color: $accentColor;
                     color: $white;

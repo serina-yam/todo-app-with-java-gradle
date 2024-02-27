@@ -94,7 +94,7 @@ public class LoginControllerTests {
         when(oAuth2User.getAttribute(anyString())).thenReturn("dummy");
 
         // userRepository.findByOauth2UserId()がユーザーオブジェクトを返すように設定
-        User user = new User(oauth2UserName, null, oauth2UserId, LoginType.GITHUB.getValue());
+        User user = new User(1, oauth2UserName, null, oauth2UserId, LoginType.GITHUB.getValue());
         when(userRepository.findByOauth2UserId(anyString())).thenReturn(user);
 
         // テスト実行

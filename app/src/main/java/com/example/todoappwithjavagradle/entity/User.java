@@ -4,8 +4,6 @@ import java.sql.Timestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -21,7 +19,6 @@ import lombok.Data;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Integer userId;
 
@@ -54,7 +51,8 @@ public class User {
      * @param oauth2UserId OAuth2 ユーザー ID
      * @param loginType    ログインタイプ
      */
-    public User(String username, String passwordHash, String oauth2UserId, String loginType) {
+    public User(Integer userId, String username, String passwordHash, String oauth2UserId, String loginType) {
+        this.userId = userId;
         this.username = username;
         this.passwordHash = passwordHash;
         this.oauth2UserId = oauth2UserId;

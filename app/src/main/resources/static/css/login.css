@@ -29,7 +29,6 @@
 
 .text-danger {
   color: #db4455;
-  white-space: nowrap;
 }
 
 .changed {
@@ -62,6 +61,10 @@
   width: 70%;
   margin: 0 auto;
 }
+.login .login__container .login__box .login__inner .login__innerbox {
+  display: flex;
+  flex-direction: column;
+}
 .login .login__container .login__box .login__inner .login__title {
   margin-bottom: 2.4rem;
 }
@@ -70,6 +73,7 @@
   line-height: 2rem;
   width: 100%;
   margin-bottom: 0.6rem;
+  max-width: 24rem;
 }
 .login .login__container .login__box .login__inner .text-danger {
   margin-top: 0rem;
@@ -81,6 +85,7 @@
 .login .login__container .login__box .login__inner .btn {
   width: 100%;
   margin-bottom: 0.6rem;
+  max-width: 24rem;
 }
 .login .login__container .login__box .login__inner .btn-login {
   background-color: #80c4d8;

@@ -5,14 +5,11 @@ import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import lombok.Data;
-
 
 /**
  * アイテム情報エンティティクラス
@@ -23,7 +20,6 @@ import lombok.Data;
 public class Item {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "user_id")
@@ -36,7 +32,7 @@ public class Item {
     private Integer state;
 
     @Column(name = "time_limit")
-    private  Date timeLimit;
+    private Date timeLimit;
 
     @Column(name = "created_at")
     private java.sql.Timestamp createdAt;
@@ -46,19 +42,20 @@ public class Item {
 
     public Item() {
     }
-    
+
     /**
      * コンストラクタ
      * 
-     * @param id         アイテムID
-     * @param userId     ユーザーID
-     * @param title      タイトル
-     * @param state      状態
-     * @param timeLimit  期限
-     * @param createdAt  作成日時
-     * @param updatedAt  更新日時
+     * @param id        アイテムID
+     * @param userId    ユーザーID
+     * @param title     タイトル
+     * @param state     状態
+     * @param timeLimit 期限
+     * @param createdAt 作成日時
+     * @param updatedAt 更新日時
      */
-    public Item(Integer id, Integer userId, String title, Integer state, Date timeLimit, Timestamp createdAt, Timestamp updatedAt) {
+    public Item(Integer id, Integer userId, String title, Integer state, Date timeLimit, Timestamp createdAt,
+            Timestamp updatedAt) {
         this.id = id;
         this.userId = userId;
         this.title = title;
