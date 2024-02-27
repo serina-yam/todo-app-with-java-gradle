@@ -1,48 +1,41 @@
+## はじめに
+
+このアプリの詳細は Wiki の「[Home](https://github.com/serina-yam/todo-app-with-java-gradle/wiki)」にまとめています。
+
+## 実行環境
+
+- Docker 25.0.2
+- Docker Compose v2.24.3-desktop.1
+
+## 動作確認環境
+
+以下の環境で動作確認済みになります。
+
+### mac
+
+- チップ: Apple M1
+- メモリ: 8GB
+- macOS: macOS Sonoma v14.3
+
+### windows
+
+- プロセッサ:	Intel Core i7
+- 実装 RAM:	16.0 GB
+- エディション:	Windows 10 Pro
+- バージョン:	22H2
+
+※<br />
+Windows の場合は、make コマンドが使用できる状態[^1]で実施してください。<br />
+インストールせずに実施する場合は、[Makefile](https://github.com/serina-yam/todo-app-with-java-gradle/blob/main/Makefile) を参照して実施をお願いします。
+
+[^1]: GnuWin32 をインストールすることで使用可能になります
+
 ## スタートガイド
 
-### 手順1: コマンドを使用する場合(全てルートディレクトリで実行)
-#### 1. リポジトリをローカル環境にクローン
+### 💻 ローカル環境構築方法
 
-```zsh
-git clone https://github.com/serina-yam/todo-app-with-java-gradle.git
-```
-
-#### 2. Docker Composeを使用して、プロジェクトの実行環境をセットアップ
-
-```zsh
-make setup
-```
-
-#### 3. アプリケーションのビルド
-
-```zsh
-make build
-```
-
-#### 4. アプリケーションの実行
-
-```zsh
-make run
-```
-
-#### 5. ブラウザで確認
-
-http://localhost:8080
-
-#### 6. テスト実行
-
-```zsh
-make test
-```
-
-#### 7.ビルド時に作成されたテスト結果を見る
-
-```zsh
-make open-test-result
-```
-
-
-### 手順2: VSCodeを使用する場合
+コマンドでの実行方法を記載します。<br />
+VSCode での実行方法は、Wiki の「[スタートガイド ‐ VSCode 使用](https://github.com/serina-yam/todo-app-with-java-gradle/wiki/%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88%E3%82%AC%E3%82%A4%E3%83%89-%E2%80%90-VSCode%E4%BD%BF%E7%94%A8)」を参照してください。
 
 #### 1. リポジトリをローカル環境にクローン
 
@@ -50,47 +43,90 @@ make open-test-result
 git clone https://github.com/serina-yam/todo-app-with-java-gradle.git
 ```
 
-#### 2. インストールした「todo-app-with-java-gradle」ディレクトリをVSCodeで開く
+```bash
+cd todo-app-with-java-gradle
+```
 
-#### 3. プラグイン「[Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)」をインストールする
+#### 2. application.properties の置き換え
 
-![Dev Containers](https://github.com/serina-yam/todo-app-with-java-gradle/assets/64587946/daeb67a3-aa20-4ddd-ae93-452ef9217e93)
+以下にあるファイルを、AWS S3 で配布したファイルに置き換えてください。<br />
+パス： app/src/main/resources/application.properties<br />
 
-#### 4. コマンドパレットで「開発コンテナ: コンテナでリビルドして再度開く」を選択
+コマンドを使用する場合の例です。
 
-##### コマンドパレットを開く方法
-- WindowsおよびLinux: Ctrl + Shift + P
-- macOS: Command + Shift + P
-- 上部メニューの表示＞コマンドパレットを選択
-![開発コンテナ_コンテナでリビルドして再度開く](https://github.com/serina-yam/todo-app-with-java-gradle/assets/64587946/9a9993c6-ea74-456b-9f31-ed81b1466d13)
+```bash
+mv -f /Users/XXXXXX/Desktop/application.properties app/src/main/resources/application.properties
+```
 
+#### 3. Docker Compose を使用して、プロジェクトの実行環境をセットアップ
 
-#### 5. アプリケーションを起動
+```bash
+make setup
+```
 
-左メニュー：エクスプローラーのJAVA PROJECTSから、todo-app-with-java-gradleの起動ボタンをクリックして起動する。
-![JAVA PROJECTSからアプリケーションを起動](https://github.com/serina-yam/todo-app-with-java-gradle/assets/64587946/c78d4bf9-5016-456f-8f66-08486b4a349b)
-![JAVA PROJECTSからアプリケーションを起動_確認](https://github.com/serina-yam/todo-app-with-java-gradle/assets/64587946/a3597f1c-7b8b-426c-a15c-44565e2300ed)
+#### 4. アプリケーションのビルド
+
+```bash
+make build
+```
+
+#### 5. アプリケーションの実行
+
+```bash
+make run
+```
 
 #### 6. ブラウザで確認
 
 http://localhost:8080
 
-#### 7.テスト実行
+#### 7. データベース管理ツールをブラウザで開く
 
-左メニュー：テストから実行したい箇所で起動ボタンをクリックして起動する
+http://localhost:9000
 
-![test実行](https://github.com/serina-yam/todo-app-with-java-gradle/assets/64587946/4104b948-d54d-49c1-a4d8-91998fa7960d)
+### ⛏️ ビルド方法
 
-#### 8.ビルド時に作成されたテスト結果を見る
+#### 1. ビルド
 
-リモート接続を解除した状態でターミナルを開き、ルートディレクトで以下のコマンドを実行する。
-
-```zsh
-make open-test-result
+```bash
+make build
 ```
 
+#### 2. クリーンアップ
 
+```bash
+make clean
+```
 
-## ER図
+### ⛑️ テスト実行方法
 
-![er](https://github.com/serina-yam/todo-app-with-java-gradle/assets/64587946/2c9b7bf9-4608-40f4-8643-d9e952e3b6fd)
+#### 1. テスト実行
+
+```bash
+make test
+```
+
+#### 2. ビルド時に作成されたテスト結果を見る
+
+```bash
+make open-test
+```
+
+#### 3. ビルド時に作成されたカバレッジ結果を見る
+
+```bash
+make open-coverage
+```
+
+### 📖ドキュメント
+
+#### 1. Javadoc生成
+
+```bash
+make javadoc
+```
+
+#### 2. 作成されたJavadocを見る
+```bash
+make open-javadoc
+```

@@ -65,23 +65,8 @@ jobs:
       - name: Create extension pgcrypto
         run: docker exec -i ${{ job.services.postgres.id }} psql -U ${{ secrets.POSTGRES_USER }} -d ${{ secrets.POSTGRES_DB }} -c "CREATE EXTENSION IF NOT EXISTS pgcrypto;"
 
-      # Build
-      - name: Build with Gradle
+      # Build and Test
+      - name: Build and Test with Gradle
         run: |
           cd app
           ./gradlew build
-
-      # Test実行
-      - name: Run tests
-        run: |
-          cd app
-          ./gradlew test
-
-      # Dangerのセットアップ
-      - name: Install Danger
-        run: |
-          npm install -g danger
-
-      # Dangerを実行し、TODOコメントがあれば警告を出す
-      - name: Run Danger
-        run: danger

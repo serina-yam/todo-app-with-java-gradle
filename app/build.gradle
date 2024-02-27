@@ -1,13 +1,12 @@
 plugins {
-		id 'java'
+    id 'java'
     id 'org.springframework.boot' version '3.2.2'
     id 'io.spring.dependency-management' version '1.1.4'
-		id 'jacoco'
+    id 'jacoco'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-apply plugin: 'java'
 
 java {
 	sourceCompatibility = '17'
@@ -33,14 +32,14 @@ dependencies {
 	implementation 'org.webjars:popper.js:1.12.9-1'
 	implementation 'org.webjars:jquery:3.5.0'
 	implementation 'org.apache.logging.log4j:log4j-api:2.22.1'
-    implementation 'org.apache.logging.log4j:log4j-core:2.22.1'
+	implementation 'org.apache.logging.log4j:log4j-core:2.22.1'
 	implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
 	compileOnly 'org.projectlombok:lombok'
 	compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
-	annotationProcessor 'javax.servlet:javax.servlet-api:4.0.1' // 確認
+	annotationProcessor 'javax.servlet:javax.servlet-api:4.0.1'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test:6.2.2'
 }
@@ -51,6 +50,13 @@ tasks.named('test') {
 
 tasks.withType(JavaCompile) {
     options.compilerArgs << "-parameters"
+}
+
+tasks.javadoc {
+    source = sourceSets.main.allJava
+    destinationDir = file("$buildDir/docs/javadoc")
+    classpath += configurations.compileClasspath
+    options.encoding = 'UTF-8'
 }
 
 // testの設定
