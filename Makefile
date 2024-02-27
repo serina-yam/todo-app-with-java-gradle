@@ -5,11 +5,11 @@ current_dir := $(shell cd)
 ifeq ($(OS),Windows_NT)
     OPEN_TEST_CMD = call open_test.bat "$(current_dir)"
     OPEN_COVERAGE_CMD = call open_coverage.bat "$(current_dir)"
-		OPEN_JAVADOC_CMD = call open_javadoc.bat "$(current_dir)"
+    OPEN_JAVADOC_CMD = call open_javadoc.bat "$(current_dir)"
 else
     OPEN_TEST_CMD = open ./app/build/reports/tests/test/index.html
     OPEN_COVERAGE_CMD = open ./app/build/reports/jacoco/test/html/index.html
-		OPEN_JAVADOC_CMD = open ./app/build/docs/javadoc/index.html
+    OPEN_JAVADOC_CMD = open ./app/build/docs/javadoc/index.html
 endif
 
 # ヘルプメッセージを表示
@@ -74,7 +74,7 @@ open-coverage:
 	$(OPEN_COVERAGE_CMD)
 
 open-javadoc:
-	$(OPEN_COVERAGE_CMD)
+	$(OPEN_JAVADOC_CMD)
 
 # テスト結果htmlのパスを表示
 show-test:
