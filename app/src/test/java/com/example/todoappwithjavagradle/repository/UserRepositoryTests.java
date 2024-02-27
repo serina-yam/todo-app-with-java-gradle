@@ -32,7 +32,7 @@ public class UserRepositoryTests {
     @CsvFileSource(resources = "/user_test_data.csv", numLinesToSkip = 1)
     public void testFindByUsername(Integer userId, String loginType, String username, String passwordHash) {
         // モックの設定
-        User user = new User(username, passwordHash, null, LoginType.FORM.toString());
+        User user = new User(userId, username, passwordHash, null, LoginType.FORM.toString());
         when(userRepository.findByUsername(username)).thenReturn(user);
 
         // テスト

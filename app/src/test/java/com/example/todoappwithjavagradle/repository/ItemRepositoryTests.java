@@ -34,13 +34,13 @@ public class ItemRepositoryTests {
 		itemList.add(new Item());
 
 		// モックの設定
-		when(itemRepository.findByUserIdOrderByCreatedAtAsc(userId)).thenReturn(itemList);
+		when(itemRepository.findByUserIdOrderByIdAsc(userId)).thenReturn(itemList);
 
 		// テスト
-		List<Item> actual = itemRepository.findByUserIdOrderByCreatedAtAsc(userId);
+		List<Item> actual = itemRepository.findByUserIdOrderByIdAsc(userId);
 
 		// 検証
-		verify(itemRepository, times(1)).findByUserIdOrderByCreatedAtAsc(userId);
+		verify(itemRepository, times(1)).findByUserIdOrderByIdAsc(userId);
 		assertEquals(itemList, actual);
 	}
 

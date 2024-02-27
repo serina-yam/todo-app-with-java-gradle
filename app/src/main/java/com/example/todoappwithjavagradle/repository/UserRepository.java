@@ -1,6 +1,7 @@
 package com.example.todoappwithjavagradle.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.example.todoappwithjavagradle.entity.User;
@@ -26,4 +27,12 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      * @return ユーザーエンティティ
      */
     User findByOauth2UserId(String oauth2UserId);
+
+    /**
+     * シーケンス取得
+     * 
+     * @return ユーザーID
+     */
+    @Query(value = "SELECT nextval('users_id_seq')", nativeQuery = true)
+    Integer getNextUserId();
 }

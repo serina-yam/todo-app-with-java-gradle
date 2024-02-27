@@ -25,8 +25,9 @@ public class UserTests {
 	public void testConstructorAndGetters(Integer userId, String loginType, String username, String passwordHash,
 			String oauth2UserId) {
 
-		User user = new User(username, passwordHash, oauth2UserId, loginType);
+		User user = new User(userId, username, passwordHash, oauth2UserId, loginType);
 
+		assertEquals(userId, user.getUserId());
 		assertEquals(username, user.getUsername());
 		assertEquals(passwordHash, user.getPasswordHash());
 		assertEquals(oauth2UserId, user.getOauth2UserId());

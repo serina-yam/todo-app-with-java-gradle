@@ -84,7 +84,7 @@ public class UserControllerTests {
             String username, String passwordHash) {
 
         Model model = mock(Model.class);
-        User user = new User(username, passwordHash, null, LoginType.FORM.getValue());
+        User user = new User(1, username, passwordHash, null, LoginType.FORM.getValue());
         when(userService.getUserByUsername(username)).thenReturn(user);
         // テスト
         String actual = userController.signupUser(username, passwordHash, model);

@@ -32,7 +32,7 @@ public class ItemService {
    */
   public List<Item> searchAll(Integer userId) {
     // アイテムTBLの内容を全検索
-    return itemRepository.findByUserIdOrderByCreatedAtAsc(userId);
+    return itemRepository.findByUserIdOrderByIdAsc(userId);
   }
 
   /**
@@ -45,6 +45,10 @@ public class ItemService {
     Item item = new Item();
     Integer userId = Integer.parseInt(httpSession.getAttribute(AttributeKey.USER_ID.getValue()).toString());
 
+    // シーケンスからユーザーIDを取得
+    Integer id = itemRepository.getNextId();
+
+    item.setId(id);
     item.setUserId(userId);
     item.setTitle(itemRequest.getTitle());
     item.setState(0);

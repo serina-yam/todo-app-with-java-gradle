@@ -35,10 +35,13 @@ public class UserService {
      */
     public Integer signupUserFromProvider(String oauth2UserId, String username, String loginType) {
         // GitHub or Google
-        User user = new User(oauth2UserId, null, username, loginType);
 
-        User result = userRepository.save(user);
-        Integer userId = result.getUserId();
+        // シーケンスからユーザーIDを取得
+        Integer userId = userRepository.getNextUserId();
+
+        User user = new User(userId, oauth2UserId, null, username, loginType);
+
+        userRepository.save(user);
         return userId;
     }
 
@@ -52,10 +55,13 @@ public class UserService {
     public Integer signupUserFromForm(String username, String password) {
         // パスワードをハッシュ化して保存
         String passwordHash = passwordEncoder.encode(password);
-        User user = new User(username, passwordHash, null, LoginType.FORM.getValue());
 
-        User result = userRepository.save(user);
-        Integer userId = result.getUserId();
+        // シーケンスからユーザーIDを取得
+        Integer userId = userRepository.getNextUserId();
+
+        User user = new User(userId, username, passwordHash, null, LoginType.FORM.getValue());
+
+        userRepository.save(user);
         return userId;
     }
 
